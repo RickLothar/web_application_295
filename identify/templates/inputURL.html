@@ -1,0 +1,13 @@
+{% block content %}
+  <h1>Input a YouTube URL</h1>
+  {% if user.is_authenticated %}
+  	<h2>Hi {{ user.username }}! </h2>
+  {% endif %}
+  <form action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit">
+  </form>
+{% endblock %}

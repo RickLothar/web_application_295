@@ -1,0 +1,18 @@
+{% block content %}
+  <h1>Login</h1>
+  <form action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit">
+  </form>
+<a href="{% url 'signup' %}">Sign Up!</a>
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% endblock %}

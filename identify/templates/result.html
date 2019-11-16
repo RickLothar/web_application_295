@@ -1,0 +1,28 @@
+{% load staticfiles %}
+{% block content %}
+  <h1>Input a YouTube URL</h1>
+  <h2>Result:</h2>
+  <h3> Target: {{target}} </h3>
+  <body>
+
+	{% if output_filepath  %}
+		<video width='320' height= '240' controls>
+			<source src="{% static output_filepath %}" type="video/mp4">
+			Your browser does not support the video tag.
+		</video>
+	{% else %}
+    		<h3> No Video </h3>
+	{% endif %}
+	<br>
+	<br>
+
+	{% for key, value in result.items %}
+    {{ key }} <br>
+	    {% for r in value %}
+	        {{  r.target_name }} : {{  r.start_time }} ~ {{  r.end_time }} <br>
+	    {% endfor %}
+	{% endfor %}
+
+
+  <body>
+{% endblock %}

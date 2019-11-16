@@ -1,0 +1,12 @@
+{% block content %}
+<h1> Home</h1>
+{% if user.is_authenticated %}
+  <h2>Hi {{ user.username }}! </h2>
+  <p><a href="{% url 'userlogout' %}">logout</a></p>
+  <p><a href="{% url 'input_url' %}">input URL</a></p>
+  <p><a href="{% url 'history' %}">history</a></p>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'userlogin' %}">login</a>
+{% endif %}
+{% endblock %}

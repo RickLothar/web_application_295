@@ -1,0 +1,20 @@
+{% block content %}
+  <body>
+  <h1>Input a YouTube URL</h1>
+
+  {% if user.is_authenticated %}
+    <h2>Hi {{ user.username }}! </h2>
+  {% endif %}
+  <h2>History:</h2>
+
+  {% for element in history %}
+    <ul>
+      <li>{{ element.video.file_name }} </li>
+      <li>{{ element.target_name }} </li>
+      <li colspan="2">{{ element.target_result }} </li>
+    </ul>
+  {% endfor %}
+
+
+  <body>
+{% endblock %}
