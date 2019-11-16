@@ -3,19 +3,19 @@
 ### Recommend using Python 3.6 up
 
 ### superuser:
-admin/123
+admin/123  
 user/user12345
 
 ### Create superuser:
-python manage.py createsuperuser
+`$ python manage.py createsuperuser`
 
 ### Model Modification:
-python manage.py makemigrations identify
-python manage.py migrate
+`$ python manage.py makemigrations identify  `
+`$ python manage.py migrate`
 
 ### Run server:
-python3 manage.py runserver
+`$ python manage.py runserver`
 
-Steps for enabling dowloading youtube video function
+Steps for enabling dowloading youtube video function  
 `$ /Applications/Python\ 3.X/Install\ Certificates.command`
 ###### filler your own python version
