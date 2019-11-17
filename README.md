@@ -4,6 +4,8 @@
 
 ### webstie : http://127.0.0.1:8000/ or http://127.0.0.1:8000/identify
 
+### install the libraries
+`pip install -r requirements.txt`
 
 ### current users in database:
 admin/123  
