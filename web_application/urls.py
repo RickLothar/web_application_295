@@ -30,6 +30,15 @@ urlpatterns = [
     path('signup', views.SignUp.as_view(), name='signup'),
     path('login', auth_views.LoginView.as_view(), name='login'),
     path('logout', auth_views.LogoutView.as_view(), name='logout'),
+    # channel
+    path('channel/create', views.CreateChannel.as_view(), name='create_channel'),
+    path('channel/<int:pk>', views.DetailChannel.as_view(), name='detail_channel'),
+    path('channel/<int:pk>/update', views.UpdateChannel.as_view(), name='update_channel'),
+    path('channel/<int:pk>/delete', views.DeleteChannel.as_view(), name='delete_channel'),
+    # Video
+    path('channel/<int:pk>/addvideo', views.add_video, name='add_video'),
+    path('video/<int:pk>/delete', views.DeleteVideo.as_view(), name='delete_video'),
+    path('video/<int:pk>', views.DetailVideo.as_view(), name='detail_video'),
 ]
 
 

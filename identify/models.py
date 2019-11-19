@@ -27,3 +27,9 @@ class Video(models.Model):
 class Channel(models.Model):
 	title = models.CharField(max_length=255)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class VideoOnline(models.Model):
+    title = models.CharField(max_length=255)
+    url = models.URLField()
+    youtube_id = models.CharField(max_length=255)
+    channel = models.ForeignKey(Channel, on_delete=models.CASCADE)

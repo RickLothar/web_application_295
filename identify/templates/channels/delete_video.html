@@ -1,0 +1,27 @@
+{% extends 'channels/base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Are you sure you want to delete this video?</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </form>
+
+    <br />
+  <div class="row">
+    {% comment %} <div class="col-md-4 mt-3">
+        <div class="card mb-4 shadow-sm"> {% endcomment %}
+          <iframe width="100%" height="600" src="https://www.youtube.com/embed/{{ videoonline.youtube_id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="card-body">
+            {% comment %} <p class="card-text">{{ videoonline.title }}</p> {% endcomment %}
+          </div>
+        {% comment %} </div>
+      </div> {% endcomment %}
+  </div>
+
+  <h2>{{ videoonline.title }}</h2>
+  <p class='text-muted'>Check its contents before you delete it</p>
+
+</div>
+{% endblock %}

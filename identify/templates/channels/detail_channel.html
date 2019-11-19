@@ -1,0 +1,33 @@
+{% extends 'channels/base.html' %}
+{% block content %}
+<div class="container">
+<h1>{{ channel.title }}</h1>
+<h4 class="text-muted">{{ channel.user.username }}</h4>
+
+{% if user.id == channel.user.id %}
+<a href="{% url 'delete_channel' channel.id %}" class="btn btn-danger">Delete</a>
+<a href="{% url 'update_channel' channel.id %}" class="btn btn-primary">Edit</a>
+<a href="{% url 'add_video' channel.id %}" class="btn btn-primary">Add Video</a>
+{% endif %}
+
+    <div class="row">
+      {% for video in channel.videoonline_set.all %}
+      <div class="col-md-4 mt-3">
+        <div class="card mb-4 shadow-sm">
+          <iframe width="100%" height="225" src="https://www.youtube.com/embed/{{ video.youtube_id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="card-body">
+            <p class="card-text">{{ video.title }}</p>
+            {% comment %} <p class="card-text">{{ video.youtube_id }}</p> {% endcomment %}
+            {% if user.id == channel.user.id %}
+            <a href="{% url 'delete_video' video.id %}" class="btn btn-danger">Delete</a>
+            {% comment %} <a href="{% url 'detail_video' video.id %}" class="btn btn-secondary">Watch Clips</a> {% endcomment %}
+            {% endif %}
+            <a href="{% url 'detail_video' video.id %}" class="btn btn-secondary">Watch Clips</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      </div>
+
+</div>
+{% endblock %}

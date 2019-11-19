@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
@@ -10,145 +10,211 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 import uuid
 import logging
 import json
 import datetime
-from .form import inputURLForm
-from .models import Result, Channel, Video
+from .form import inputURLForm, VideoOnlineForm
+from .models import Result, Channel, Video, VideoOnline
 from .identify_video_from_url import identify, getTarget_fromResult, getAll_fromResult
 from .edit_video import extract_video_by_target, concatenate_video
 
 from django.http import Http404, JsonResponse
 from django.forms.utils import ErrorList
 from django.views import generic
+import urllib
+import requests
+
+YOUTUBE_API_KEY = 'AIzaSyDuPOQeKiEuzblKFRIOSI2XID9MAkqLiCE'
+
 
 @login_required
 def inputURL(request):
 
-	# If this is a POST request then process the Form data
-	if request.method == 'POST':
+    # If this is a POST request then process the Form data
+    if request.method == 'POST':
 
-		if request.user.is_authenticated:
-			username = request.user.username
-			logging.info('username: %s', username)
+        if request.user.is_authenticated:
+            username = request.user.username
+            logging.info('username: %s', username)
 
-		# Create a form instance and populate it with data from the request (binding):
-		form = inputURLForm(request.POST)
-		if form.is_valid():
-			url = form.cleaned_data['url']
-			target = form.cleaned_data['target']
-			making_video = form.cleaned_data['making_video']
+        # Create a form instance and populate it with data from the request (binding):
+        form = inputURLForm(request.POST)
+        if form.is_valid():
+            url = form.cleaned_data['url']
+            target = form.cleaned_data['target']
+            making_video = form.cleaned_data['making_video']
 
-		logging.info('url: %s', url)
-		logging.info('target: %s', target)
-		filename = datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
-		logging.info('newfile: %s', filename)
-		resultjson = identify(username, str(url), filename,  str(target))
-		logging.info('result: %s', resultjson)
-		
-		# result_obj = Result.objects.get(file_name=filename)
-		# resultjson = result_obj.target_result
-		# filename = '2019-11-15-19-43-27.mp4'
-		output_filepath = ''
+        logging.info('url: %s', url)
+        logging.info('target: %s', target)
+        filename = datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
+        logging.info('newfile: %s', filename)
+        resultjson = identify(username, str(url), filename,  str(target))
+        logging.info('result: %s', resultjson)
+        
+        # result_obj = Result.objects.get(file_name=filename)
+        # resultjson = result_obj.target_result
+        # filename = '2019-11-15-19-43-27.mp4'
+        output_filepath = ''
 
-		if not target:
-			result = getAll_fromResult(resultjson)
-			output_filepath = ''
-		else:
-			result = getTarget_fromResult(resultjson, target)
-			if making_video and result['appearance_time']: 
-				a = datetime.datetime.now()
-				extract_video_by_target(result, filename, target)
-				output_filepath = concatenate_video(filename, target)
-				b = datetime.datetime.now()
-				logging.info("making new video time: %s", str(b-a))
-			
-		context = {
-			'target' : target,
-			'result': result,
-			'output_filepath': output_filepath
-		}
+        if not target:
+            result = getAll_fromResult(resultjson)
+            output_filepath = ''
+        else:
+            result = getTarget_fromResult(resultjson, target)
+            if making_video and result['appearance_time']: 
+                a = datetime.datetime.now()
+                extract_video_by_target(result, filename, target)
+                output_filepath = concatenate_video(filename, target)
+                b = datetime.datetime.now()
+                logging.info("making new video time: %s", str(b-a))
+            
+        context = {
+            'target' : target,
+            'result': result,
+            'output_filepath': output_filepath
+        }
 
-		return render(request, 'result.html', context)
+        return render(request, 'result.html', context)
 
-	# If this is a GET (or any other method) create the default form.
-	else:
-		form = inputURLForm()
-		context = {
-			'form': form,
-		}
-		return render(request, 'inputURL.html', context)
+    # If this is a GET (or any other method) create the default form.
+    else:
+        form = inputURLForm()
+        context = {
+            'form': form,
+        }
+        return render(request, 'inputURL.html', context)
 
 def userlogin(request):
-	if request.method == 'POST':
-		form = AuthenticationForm(request=request, data=request.POST)
-		if form.is_valid():
-			username = form.cleaned_data.get("username")
-			password = form.cleaned_data.get("password")
-			user = authenticate(username=username, password=password)
-			logging.info('username: %s password: %s', username, password)
-			if user is not None:
-				login(request, user)
-				return HttpResponseRedirect(reverse('input_url') )
-			else:
-				messages.error(request, "Invalid username or password.")
-		else:
-			messages.error(request, "Invalid username or password.")
-	# If this is a GET (or any other method) create the default form.
-	else : 
-		if request.user.is_authenticated:
-			return HttpResponseRedirect(reverse('home') )
-		else:
-			form = AuthenticationForm()
-			context = {
-				'form': form,
-			}
-			return render(request, 'login.html', context)
+    if request.method == 'POST':
+        form = AuthenticationForm(request=request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            user = authenticate(username=username, password=password)
+            logging.info('username: %s password: %s', username, password)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect(reverse('input_url') )
+            else:
+                messages.error(request, "Invalid username or password.")
+        else:
+            messages.error(request, "Invalid username or password.")
+    # If this is a GET (or any other method) create the default form.
+    else : 
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(reverse('home') )
+        else:
+            form = AuthenticationForm()
+            context = {
+                'form': form,
+            }
+            return render(request, 'login.html', context)
 
 def userlogout(request):
-	logout(request)
-	return HttpResponseRedirect(reverse('home') )
+    logout(request)
+    return HttpResponseRedirect(reverse('home') )
 
 def signup(request):
-	if request.method == 'POST':
-		form = UserCreationForm(request.POST)
-		if form.is_valid():
-			form.save()
-			username = form.cleaned_data.get('username')
-			raw_password = form.cleaned_data.get('password1')
-			user = authenticate(username=username, password=raw_password)
-			form = loginForm()
-			context = {
-				'form': form,
-			}
-			return HttpResponseRedirect(reverse('userlogin') )
-	else:
-		form = UserCreationForm()
-	return render(request, 'signup.html', {'form': form})
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            form = loginForm()
+            context = {
+                'form': form,
+            }
+            return HttpResponseRedirect(reverse('userlogin') )
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})
 
 def history(request):
-	if request.user.is_authenticated:
-		user = request.user
-	history_obj = Result.objects.all().filter(user=user)
-	# resultjson = history_obj.target_result
-	context = {
-		'history': history_obj,
-	}
-	return render(request, 'history.html', context)
+    if request.user.is_authenticated:
+        user = request.user
+    history_obj = Result.objects.all().filter(user=user)
+    # resultjson = history_obj.target_result
+    context = {
+        'history': history_obj,
+    }
+    return render(request, 'history.html', context)
 
 def home(request):
-	# recent_channels = Channel.objects.all().order_by('-id')[:3]
-	recent_channels = []
-	return render(request, 'channels/home.html', {'recent_channels':recent_channels})
+    recent_channels = Channel.objects.all().order_by('-id')[:3]
+    # recent_channels = []
+    return render(request, 'channels/home.html', {'recent_channels':recent_channels})
 
 @login_required
 def dashboard(request):
     channels = Channel.objects.filter(user=request.user)
     return render(request, 'channels/dashboard.html', {'channels':channels})
 
+@login_required
+def add_video(request, pk):
+    form = VideoOnlineForm()
+    channel = Channel.objects.get(pk=pk)
+    if not channel.user == request.user:
+        raise Http404
+    if request.method == 'POST':
+        form = VideoOnlineForm(request.POST)
+        if form.is_valid():
+            video = VideoOnline()
+            video.channel = channel
+            video.url = form.cleaned_data['url']
+            parsed_url = urllib.parse.urlparse(video.url)
+            video_id = urllib.parse.parse_qs(parsed_url.query).get('v')
+            
+            if video_id:
+                # check if this video is already in the database
+                prev_video = VideoOnline.objects.filter(youtube_id=video_id[0])
+                if (prev_video.values()):
+                    for i in prev_video.values():
+                        if pk == i['channel_id']:
+                            errors = form._errors.setdefault('url', ErrorList())
+                            errors.append('Your channel already inludes this video')
+                            return render(request, 'channels/add_video.html', {'form':form, 'channel':channel})
+
+                video.youtube_id = video_id[0]
+                response = requests.get(f'https://www.googleapis.com/youtube/v3/videos?part=snippet&id={ video_id[0] }&key={ YOUTUBE_API_KEY }')
+                json = response.json()
+                title = json['items'][0]['snippet']['title']
+                video.title = title
+                video.save()
+                return redirect('detail_channel', pk)
+            else:
+                errors = form._errors.setdefault('url', ErrorList())
+                errors.append('Must be a YouTube URL')
+
+    return render(request, 'channels/add_video.html', {'form':form, 'channel':channel})
+
+
+class DetailVideo(generic.DetailView):
+    model = VideoOnline
+    template_name = 'channels/detail_video.html'
+
+class DeleteVideo(LoginRequiredMixin, generic.DeleteView):
+    model = VideoOnline
+    template_name = 'channels/delete_video.html'
+    success_url = reverse_lazy('dashboard')
+    # success_url = reverse_lazy('detail_channel')
+    # success_url = 'channel/1'
+
+    # def get_success_url(self):
+    #     video = super(DeleteVideo, self).get_object()
+    #     print(video.channel.id)
+    #     return redirect('detail_channel', video.channel.id)
+
+    def get_object(self):
+        video = super(DeleteVideo, self).get_object()
+        if not video.channel.user == self.request.user:
+            raise Http404
+        return video
 
 class SignUp(generic.CreateView):
     form_class = UserCreationForm
@@ -157,7 +223,48 @@ class SignUp(generic.CreateView):
 
     def form_valid(self, form):
         view = super(SignUp, self).form_valid(form)
+        # password1 is the password typed in the fields that ask the user to first create a password
+        # password2 is the password that asks the user to confirm password
         username, password = form.cleaned_data.get('username'), form.cleaned_data.get('password1')
         user = authenticate(username=username, password=password)
         login(self.request, user)
         return view
+
+
+class CreateChannel(LoginRequiredMixin, generic.CreateView):
+    model = Channel
+    fields = ['title']
+    template_name = 'channels/create_channel.html'
+    success_url = reverse_lazy('dashboard')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        super(CreateChannel, self).form_valid(form)
+        return redirect('dashboard')
+
+class DetailChannel(generic.DetailView):
+    model = Channel
+    template_name = 'channels/detail_channel.html'
+
+class UpdateChannel(LoginRequiredMixin, generic.UpdateView):
+    model = Channel
+    template_name = 'channels/update_channel.html'
+    fields = ['title']
+    success_url = reverse_lazy('dashboard')
+
+    def get_object(self):
+        channel = super(UpdateChannel, self).get_object()
+        if not channel.user == self.request.user:
+            raise Http404
+        return channel
+
+class DeleteChannel(LoginRequiredMixin, generic.DeleteView):
+    model = Channel
+    template_name = 'channels/delete_channel.html'
+    success_url = reverse_lazy('dashboard')
+
+    def get_object(self):
+        channel = super(DeleteChannel, self).get_object()
+        if not channel.user == self.request.user:
+            raise Http404
+        return channel
