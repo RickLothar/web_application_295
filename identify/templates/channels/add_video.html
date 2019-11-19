@@ -11,6 +11,7 @@
       {{ field.errors }}
       {{ field.label_tag }}
       {% render_field field class="form-control" %}
+      {% if field.help_text %}<small class="text-muted">{{ field.help_text|safe }}</small>{% endif %}
     </div>
     {% endfor %}
 

@@ -150,14 +150,12 @@ class DetailVideo(generic.DetailView):
 class DeleteVideo(LoginRequiredMixin, generic.DeleteView):
     model = VideoOnline
     template_name = 'channels/delete_video.html'
-    success_url = reverse_lazy('dashboard')
-    # success_url = reverse_lazy('detail_channel')
-    # success_url = 'channel/1'
+    # success_url = reverse_lazy('dashboard')
 
-    # def get_success_url(self):
-    #     video = super(DeleteVideo, self).get_object()
-    #     print(video.channel.id)
-    #     return redirect('detail_channel', video.channel.id)
+    def get_success_url(self):
+        video = super(DeleteVideo, self).get_object()
+        channelId = video.channel.id
+        return reverse_lazy('detail_channel', args=[channelId])
 
     def get_object(self):
         video = super(DeleteVideo, self).get_object()

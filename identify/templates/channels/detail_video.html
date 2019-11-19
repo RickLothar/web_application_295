@@ -1,7 +1,8 @@
 {% extends 'channels/base.html' %}
 {% block content %}
 <div class="container">
-<h1>{{ videoonline.title }}</h1>
+<h2>{{ videoonline.title }}</h2>
+<a href="{% url 'detail_channel' videoonline.channel.id %}">Return to channel {{ videoonline.channel.title }}</a>
 <br />
 <h3 class='text-muted'>The original video</h3>
 
