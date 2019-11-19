@@ -17,9 +17,13 @@ import logging
 import json
 import datetime
 from .form import inputURLForm
-from .models import Result, Channel
+from .models import Result, Channel, Video
 from .identify_video_from_url import identify, getTarget_fromResult, getAll_fromResult
 from .edit_video import extract_video_by_target, concatenate_video
+
+from django.http import Http404, JsonResponse
+from django.forms.utils import ErrorList
+from django.views import generic
 
 @login_required
 def inputURL(request):
@@ -136,4 +140,24 @@ def history(request):
 	return render(request, 'history.html', context)
 
 def home(request):
-	recent_channels = Channel.objects.all().order_by('-id')[:3]
+	# recent_channels = Channel.objects.all().order_by('-id')[:3]
+	recent_channels = []
+	return render(request, 'channels/home.html', {'recent_channels':recent_channels})
+
+@login_required
+def dashboard(request):
+    channels = Channel.objects.filter(user=request.user)
+    return render(request, 'channels/dashboard.html', {'channels':channels})
+
+
+class SignUp(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('dashboard')
+    template_name = 'registration/signup.html'
+
+    def form_valid(self, form):
+        view = super(SignUp, self).form_valid(form)
+        username, password = form.cleaned_data.get('username'), form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=password)
+        login(self.request, user)
+        return view

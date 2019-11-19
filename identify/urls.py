@@ -17,13 +17,10 @@ urlpatterns = [
 urlpatterns += [   
 	# path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('input/', views.inputURL, name='input_url'),
-    path('login/', views.userlogin, name='userlogin'),
-    path('logout/', views.userlogout, name='userlogout'),
-    path('signup/', views.signup, name='signup'),
+    # path('login/', views.userlogin, name='userlogin'),
+    # path('logout/', views.userlogout, name='userlogout'),
+    # path('signup/', views.signup, name='signup'),
     path('history/', views.history, name='history'),
-    path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
