@@ -5,7 +5,7 @@ import uuid
 
 video_path = 'identify/face_recognition/video/'
 
-def download_video_from_YoutubeURL(url, new_file, userid):
+def download_video_from_YoutubeURL(url, new_file):
 	# dowload to local file
 	logging.info("=== start to dowload ===")
 	video_url = url

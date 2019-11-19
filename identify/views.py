@@ -19,8 +19,7 @@ import json
 import datetime
 from .form import inputURLForm, VideoOnlineForm
 from .models import Result, Channel, Video, VideoOnline
-from .identify_video_from_url import identify, getTarget_fromResult, getAll_fromResult
-from .edit_video import extract_video_by_target, concatenate_video
+from .identify_video_from_url import inputURL
 
 from django.http import Http404, JsonResponse
 from django.forms.utils import ErrorList
@@ -30,63 +29,6 @@ import requests
 
 YOUTUBE_API_KEY = 'AIzaSyDuPOQeKiEuzblKFRIOSI2XID9MAkqLiCE'
 
-
-@login_required
-def inputURL(request):
-
-    # If this is a POST request then process the Form data
-    if request.method == 'POST':
-
-        if request.user.is_authenticated:
-            username = request.user.username
-            logging.info('username: %s', username)
-
-        # Create a form instance and populate it with data from the request (binding):
-        form = inputURLForm(request.POST)
-        if form.is_valid():
-            url = form.cleaned_data['url']
-            target = form.cleaned_data['target']
-            making_video = form.cleaned_data['making_video']
-
-        logging.info('url: %s', url)
-        logging.info('target: %s', target)
-        filename = datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
-        logging.info('newfile: %s', filename)
-        resultjson = identify(username, str(url), filename,  str(target))
-        logging.info('result: %s', resultjson)
-        
-        # result_obj = Result.objects.get(file_name=filename)
-        # resultjson = result_obj.target_result
-        # filename = '2019-11-15-19-43-27.mp4'
-        output_filepath = ''
-
-        if not target:
-            result = getAll_fromResult(resultjson)
-            output_filepath = ''
-        else:
-            result = getTarget_fromResult(resultjson, target)
-            if making_video and result['appearance_time']: 
-                a = datetime.datetime.now()
-                extract_video_by_target(result, filename, target)
-                output_filepath = concatenate_video(filename, target)
-                b = datetime.datetime.now()
-                logging.info("making new video time: %s", str(b-a))
-            
-        context = {
-            'target' : target,
-            'result': result,
-            'output_filepath': output_filepath
-        }
-
-        return render(request, 'result.html', context)
-
-    # If this is a GET (or any other method) create the default form.
-    else:
-        form = inputURLForm()
-        context = {
-            'form': form,
-        }
-        return render(request, 'inputURL.html', context)
 
 def userlogin(request):
     if request.method == 'POST':
@@ -186,6 +128,13 @@ def add_video(request, pk):
                 title = json['items'][0]['snippet']['title']
                 video.title = title
                 video.save()
+
+                # Start to identify face
+                inputURL(channel, video, "Yilong Zhu")
+
+                # Take Result output filepath by VideoOnline
+                result = Result.objects.get(videoonline=video)
+                logging.info("view -- result: %s", result.output.file_name)
                 return redirect('detail_channel', pk)
             else:
                 errors = form._errors.setdefault('url', ErrorList())
