@@ -12,4 +12,5 @@ class VideoOnlineForm(forms.ModelForm):
     class Meta:
         model = VideoOnline
         fields = ['url']
-        labels = {'url':'YouTube URL'}
+        labels = {'url':'* YouTube URL'}
+    target = forms.CharField(help_text="e.g. Yilong Zhu", required=False)
