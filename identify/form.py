@@ -6,7 +6,7 @@ from .models import VideoOnline
 class inputURLForm(forms.Form):
     url = forms.URLField(help_text="https://www.youtube.com/watch?v=JVeJRfLL2sU")
     target = forms.CharField(help_text="Yilong Zhu", required=False)
-    making_video = forms.BooleanField(required=False)
+    making_video = forms.BooleanField(help_text='Explain a little bit', required=False)
 
 class VideoOnlineForm(forms.ModelForm):
     class Meta:

@@ -1,13 +1,24 @@
+{% extends 'channels/base.html' %}
 {% block content %}
-  <h1>Input a YouTube URL</h1>
-  {% if user.is_authenticated %}
-  	<h2>Hi {{ user.username }}! </h2>
-  {% endif %}
-  <form action="" method="post">
+<div class='container'>
+    <h2>Input a YouTube URL</h2>
+    {% comment %} {% if user.is_authenticated %}
+      <h3 class='text-muted'>Hi {{ user.username }}! </h3>
+    {% endif %} {% endcomment %}
+    <form method="post" id="submit_video">
     {% csrf_token %}
-    <table>
-    {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit">
+    {% load widget_tweaks %}
+
+    {% for field in form %}
+    <div class="form-group {% if field.errors %}alert alert-danger{% endif %}">
+      {{ field.errors }}
+      {{ field.label_tag }}
+      {% render_field field class="form-control" %}
+      {% if field.help_text %}<small class="text-muted">{{ field.help_text|safe }}</small>{% endif %}
+    </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary">Add</button>
   </form>
+</div>
 {% endblock %}
