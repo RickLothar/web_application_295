@@ -24,3 +24,6 @@ class Video(models.Model):
 	def get_absolute_url(self):
 		return reverse('video-detail', args=[str(self.id)])
 
+class Channel(models.Model):
+	title = models.CharField(max_length=255)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -17,7 +17,7 @@ import logging
 import json
 import datetime
 from .form import inputURLForm
-from .models import Result
+from .models import Result, Channel
 from .identify_video_from_url import identify, getTarget_fromResult, getAll_fromResult
 from .edit_video import extract_video_by_target, concatenate_video
 
@@ -134,3 +134,6 @@ def history(request):
 		'history': history_obj,
 	}
 	return render(request, 'history.html', context)
+
+def home(request):
+	recent_channels = Channel.objects.all().order_by('-id')[:3]
