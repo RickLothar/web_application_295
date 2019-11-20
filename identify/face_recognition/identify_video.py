@@ -29,18 +29,18 @@ npy = path + 'npy'
 train_img = path + "train_img/1"
 
 
-def identify_video_main(input_video):
-    logging.info("=== start to identify ===")
+def identify_video_main(input_video, target_name):
+    logging.info("=== start to identify %s %s ===", input_video, target_name)
     a = datetime.datetime.now()
     input_video = input_video_dir + input_video
-    results = identify_video(input_video)
+    results = identify_video(input_video, target_name)
     logging.info("=== finish identifying ===")
     b = datetime.datetime.now()
     print(b-a)
     logging.info("identifying time period: %s", str(b-a))
     return results
 
-def identify_video(input_video):
+def identify_video(input_video, target_name):
     with tf.Graph().as_default():
         gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.6)
         sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options, log_device_placement=False))

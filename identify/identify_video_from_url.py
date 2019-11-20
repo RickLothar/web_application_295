@@ -19,7 +19,7 @@ def identify(channel, videoonline, new_file, target_name) :
 	filename = new_file + file_format
 	input_video = saving_video(channel, filename)
 	logging.info('video_title: %s', filename)
-	result = identify_video_main(filename)
+	result = identify_video_main(filename, target_name)
 	result_obj = saving_result(channel, videoonline, input_video, target_name, result)
 	logging.info('identify-result: %s', result_obj.target_result)
 	return result_obj
