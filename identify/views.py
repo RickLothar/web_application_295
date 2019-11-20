@@ -26,6 +26,8 @@ from django.forms.utils import ErrorList
 from django.views import generic
 import urllib
 import requests
+import threading
+from django.core.exceptions import ObjectDoesNotExist
 
 YOUTUBE_API_KEY = 'AIzaSyDuPOQeKiEuzblKFRIOSI2XID9MAkqLiCE'
 
@@ -109,6 +111,7 @@ def add_video(request, pk):
             video = VideoOnline()
             video.channel = channel
             video.url = form.cleaned_data['url']
+            target = form.cleaned_data['target']
             parsed_url = urllib.parse.urlparse(video.url)
             video_id = urllib.parse.parse_qs(parsed_url.query).get('v')
             
@@ -129,12 +132,12 @@ def add_video(request, pk):
                 video.title = title
                 video.save()
 
-                # Start to identify face
-                inputURL(channel, video, "Yilong Zhu")
+                identify_thread = threading.Thread(target=inputURLThread, args=(channel, video, target))
+                identify_thread.start()
 
-                # Take Result output filepath by VideoOnline
-                result = Result.objects.get(videoonline=video)
-                logging.info("view -- result: %s", result.output.file_name)
+                # # Take Result output filepath by VideoOnline
+                # result = Result.objects.get(videoonline=video)
+                # logging.info("view -- result: %s", result.output.file_name)
                 return redirect('detail_channel', pk)
             else:
                 errors = form._errors.setdefault('url', ErrorList())
@@ -142,6 +145,21 @@ def add_video(request, pk):
 
     return render(request, 'channels/add_video.html', {'form':form, 'channel':channel})
 
+
+def inputURLThread(channel, video, target) : 
+	# Start to identify face
+	inputURL(channel, video, target)
+	logging.info('===== channel: %s video: %s target: %s is done ====' , channel.title, video.title, target)
+
+
+def DetailVideoRender(request, pk):
+	videoonline = VideoOnline.objects.get(pk=pk)
+	try :
+		result = Result.objects.get(videoonline=videoonline)
+		clippedvideo = result.output
+	except ObjectDoesNotExist:
+		clippedvideo = ''
+	return render(request, 'channels/detail_video.html', {'videoonline':videoonline, 'clippedvideo':clippedvideo})
 
 class DetailVideo(generic.DetailView):
     model = VideoOnline

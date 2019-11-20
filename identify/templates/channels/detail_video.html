@@ -1,4 +1,5 @@
 {% extends 'channels/base.html' %}
+{% load staticfiles %}
 {% block content %}
 <div class="container">
 <h2>{{ videoonline.title }}</h2>
@@ -64,6 +65,17 @@
           </div>
         </div>
       </div> {% endcomment %}
+    </div>
+
+    <div>
+      {% if clippedvideo and clippedvideo.file_name  %}
+        <video width='100%' height= '225' controls>
+          <source src="{% static clippedvideo.file_name %}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      {% else %}
+            <h3> No Video </h3>
+      {% endif %}
     </div>
 
 </div>
