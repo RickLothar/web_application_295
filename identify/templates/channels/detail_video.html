@@ -1,11 +1,14 @@
 {% extends 'channels/base.html' %}
 {% load staticfiles %}
 {% block content %}
+<section class="jumbotron text-center">
+  <div class="container">
+    <h1 class="jumbotron-heading">{{ videoonline.title }}</h1>
+    <a href="{% url 'detail_channel' videoonline.channel.id %}">Return to channel {{ videoonline.channel.title }}</a>
+  </div>
+</section>
 <div class="container">
-<h2>{{ videoonline.title }}</h2>
-<a href="{% url 'detail_channel' videoonline.channel.id %}">Return to channel {{ videoonline.channel.title }}</a>
-<br />
-<h3 class='text-muted'>The original video</h3>
+  <h3 class='text-muted'>The original video</h3>
 
 
 
@@ -25,7 +28,10 @@
     
     </div>
     <br />
-    <h3 class='text-muted'>The Clips of the target</h3>
+    <div class="row">
+      <h3 class='text-muted'>The Clips of the Target Character</h3>
+    </div>
+    
 
     <div class='row'>
       {% if clippedvideo and clippedvideo.file_name  %}
@@ -34,7 +40,7 @@
           Your browser does not support the video tag.
         </video>
       {% else %}
-          <h3> No Video </h3>
+          <h3> Clip Video Not Ready Yet. </h3>
       {% endif %}
     </div>
 
