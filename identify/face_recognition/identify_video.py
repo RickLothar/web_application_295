@@ -16,18 +16,11 @@ import datetime
 import sys
 from .celebrity_dictionary import dic
 
-
 path = "identify/face_recognition/"
 input_video_dir = path + "video/"
 modeldir = path + 'model/20170511-185253.pb'
 # classifier_filename = path + 'class/classifier.pkl'
-# classifier_filename = path + 'class/' + dic[sys.argv[1]] + '.pkl'
-classifier_filename = path + 'class/1.pkl'
-npy = path + 'npy'
 # train_img = path + "train_img"
-# train_img = path + "train_img" + dic[sys.argv[1]]
-train_img = path + "train_img/1"
-
 
 def identify_video_main(input_video, target_name):
     logging.info("=== start to identify %s %s ===", input_video, target_name)
@@ -41,6 +34,10 @@ def identify_video_main(input_video, target_name):
     return results
 
 def identify_video(input_video, target_name):
+    classifier_filename = path + 'class/' + dic[target_name] + '.pkl'
+    npy = path + 'npy'
+    train_img = path + "train_img/" + dic[target_name]
+
     with tf.Graph().as_default():
         gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.6)
         sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options, log_device_placement=False))
@@ -95,11 +92,16 @@ def identify_video(input_video, target_name):
                 if frame_gap % 10 != 1:
                     continue
                 # new
-                # if ret is False and last_appearance:
-                #     appearance_time.append([start_time, timestamp])
-                #     print("-----------------------------------------------------")
-                #     print('Total Appearance Time: ', appearance_time)
-                #     print("-----------------------------------------------------")
+                if ret is False and last_appearance:
+                    appearnace = {}
+                    appearnace["target_name"] = result_names
+                    appearnace["start_time"] = start_time
+                    appearnace["end_time"] = end_time
+                    result['appearance_time'].append(appearnace)
+                    appearance_time.append([start_time, timestamp])
+                    print("-----------------------------------------------------")
+                    print('Total Appearance Time: ', appearance_time)
+                    print("-----------------------------------------------------")
 
                 try:
                     frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)  # resize frame (optional)
@@ -161,8 +163,7 @@ def identify_video(input_video, target_name):
                             print(HumanNames[best_class_indices[0]], ' with accuracy ', best_class_probabilities)
 
                             # print(best_class_probabilities)
-                            # if best_class_probabilities > 0.56 and HumanNames[best_class_indices[0] == sys.argv[1]]:
-                            if best_class_probabilities > 0.56 and HumanNames[best_class_indices[0]] == "Zhu Yilong":
+                            if best_class_probabilities > 0.56 and HumanNames[best_class_indices[0] == target_name]:
                                 # new
                                 if not last_appearance:
                                     start_time = timestamp
