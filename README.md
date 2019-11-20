@@ -27,7 +27,7 @@ user/user12345
 
 ### DataBase Updating or Model Modification:
 
-`$ python manage.py makemigrations identify`
+`$ python manage.py makemigrations`
 `$ python manage.py migrate`
 
 ### Run server:
