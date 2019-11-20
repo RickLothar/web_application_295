@@ -2,23 +2,36 @@
 
 ### Recommend using Python 3.6 up
 
-### webstie : http://127.0.0.1:8000/ or http://127.0.0.1:8000/identify
+### webstie : http://127.0.0.1:8000/
 
-### create a virtualenv with python 3.6 (do not use python 3.7, this will fail the tenserflow install)
+### admin: http://127.0.0.1:8000/admin  
+
+username: admin password:123
+
+### 1. create a virtualenv with python 3.6 (do not use python 3.7, this will fail the tenserflow install)
 
 `python3 -m venv projvenv`
 
-### activate the projvenv just created
+### 2. activate the projvenv just created
 
 `source projvenv/bin/activate`
 
-### install the libraries
+### 3. install the libraries
 
 `pip install -r requirements.txt`
 
+### 4. Steps for enabling dowloading youtube video function
+
+`$ /Applications/Python\ 3.X/Install\ Certificates.command`
+
+###### Python 3.X -> filled your own python version
+
+### 5. Run server:
+
+`$ python manage.py runserver`
+
 ### current users in database:
 
-admin/123  
 user/user12345
 
 #### Create superuser:
@@ -27,15 +40,7 @@ user/user12345
 
 ### DataBase Updating or Model Modification:
 
-`$ python manage.py makemigrations`
-`$ python manage.py migrate`
+`$ python manage.py makemigrations`  
+`$ python manage.py migrate`  
 
-### Run server:
 
-`$ python manage.py runserver`
-
-### Steps for enabling dowloading youtube video function
-
-`$ /Applications/Python\ 3.X/Install\ Certificates.command`
-
-###### Python 3.X -> filled your own python version
