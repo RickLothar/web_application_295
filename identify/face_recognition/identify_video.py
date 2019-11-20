@@ -13,13 +13,20 @@ import pickle
 import json
 import logging
 import datetime
+import sys
+from .celebrity_dictionary import dic
+
 
 path = "identify/face_recognition/"
 input_video_dir = path + "video/"
 modeldir = path + 'model/20170511-185253.pb'
-classifier_filename = path + 'class/classifier.pkl'
+# classifier_filename = path + 'class/classifier.pkl'
+# classifier_filename = path + 'class/' + dic[sys.argv[1]] + '.pkl'
+classifier_filename = path + 'class/1.pkl'
 npy = path + 'npy'
-train_img = path + "train_img"
+# train_img = path + "train_img"
+# train_img = path + "train_img" + dic[sys.argv[1]]
+train_img = path + "train_img/1"
 
 
 def identify_video_main(input_video):
@@ -87,15 +94,22 @@ def identify_video(input_video):
                 # 每10帧做一次人脸识别，约0.3秒间隔
                 if frame_gap % 10 != 1:
                     continue
-                try:    
+                # new
+                # if ret is False and last_appearance:
+                #     appearance_time.append([start_time, timestamp])
+                #     print("-----------------------------------------------------")
+                #     print('Total Appearance Time: ', appearance_time)
+                #     print("-----------------------------------------------------")
+
+                try:
                     frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)  # resize frame (optional)
                 except Exception as e:
                     print("resize error:" + str(e))
                     break;
+                # frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)  # resize frame (optional)
 
                 curTime = time.time() + 1  # calc fps
                 timeF = frame_interval
-                
 
                 if c % timeF == 0:
                     # new
@@ -144,10 +158,11 @@ def identify_video(input_video):
                             best_class_indices = np.argmax(predictions, axis=1)
                             best_class_probabilities = predictions[np.arange(len(best_class_indices)), best_class_indices]
                             # print("predictions")
-                            print(best_class_indices, ' with accuracy ', best_class_probabilities)
+                            print(HumanNames[best_class_indices[0]], ' with accuracy ', best_class_probabilities)
 
                             # print(best_class_probabilities)
-                            if best_class_probabilities > 0.53:
+                            # if best_class_probabilities > 0.56 and HumanNames[best_class_indices[0] == sys.argv[1]]:
+                            if best_class_probabilities > 0.56 and HumanNames[best_class_indices[0]] == "Zhu Yilong":
                                 # new
                                 if not last_appearance:
                                     start_time = timestamp
@@ -192,8 +207,8 @@ def identify_video(input_video):
                             appearnace = {}
                             appearnace["target_name"] = result_names
                             appearnace["start_time"] = start_time
-                            appearnace["end_time"] = end_time 
-                            result['appearance_time'].append(appearnace)  
+                            appearnace["end_time"] = end_time
+                            result['appearance_time'].append(appearnace)
                             appearance_time.append([start_time, end_time])
                             last_last_appearance = False
                         print('Alignment Failure')

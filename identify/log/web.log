@@ -1,64 +1,101 @@
-19-11-19 02:39:14 - Internal Server Error: /
-Traceback (most recent call last):
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/base.py", line 470, in parse
-    compile_func = self.tags[command]
-KeyError: 'endfor'
+19-11-20 00:06:35 - newfile: 2019-11-20-00-06-35
+19-11-20 00:06:35 - url: https://www.youtube.com/watch?v=a2Nmx1GQ0dg&t=7s
+19-11-20 00:06:35 - target: Zhu Yilong
+19-11-20 00:06:35 - === start to dowload ===
+19-11-20 00:06:37 - download: [EN SUB] 20191111 朱一龍竟然用便當盒裝隱形眼鏡？突擊檢查朱一龍的洗漱包！｜Zhu Yilong‘s Toiletries Bag Spot-check! gogoboi專訪
+19-11-20 00:06:37 - <Stream: itag="22" mime_type="video/mp4" res="720p" fps="30fps" vcodec="avc1.64001F" acodec="mp4a.40.2">
+19-11-20 00:06:39 - === finish dowloading ===
+19-11-20 00:06:39 - saving video: Channel object (4) 2019-11-20-00-06-35.mp4
+19-11-20 00:06:39 - video_title: 2019-11-20-00-06-35.mp4
+19-11-20 00:06:39 - === start to identify ===
+19-11-20 00:11:37 - === finish identifying ===
+19-11-20 00:11:37 - identifying time period: 0:04:57.942320
+19-11-20 00:11:37 - saving result: Channel object (4) 2019-11-20-00-06-35.mp4 Zhu Yilong {"appearance_time": [{"target_name": "Zhu Yilong", "start_time": 0.04, "end_time": 1.24}, {"target_name": "Zhu Yilong", "start_time": 2.04, "end_time": 4.04}, {"target_name": "Zhu Yilong", "start_time": 44.84, "end_time": 47.24}, {"target_name": "Zhu Yilong", "start_time": 48.04, "end_time": 49.64}, {"target_name": "Zhu Yilong", "start_time": 91.64, "end_time": 92.44}, {"target_name": "Zhu Yilong", "start_time": 96.84, "end_time": 118.04}, {"target_name": "Zhu Yilong", "start_time": 121.24, "end_time": 127.64}, {"target_name": "Zhu Yilong", "start_time": 129.64, "end_time": 130.04}, {"target_name": "Zhu Yilong", "start_time": 131.24, "end_time": 132.84}, {"target_name": "Zhu Yilong", "start_time": 134.44, "end_time": 139.64}, {"target_name": "Zhu Yilong", "start_time": 140.84, "end_time": 147.24}, {"target_name": "Zhu Yilong", "start_time": 155.24, "end_time": 160.04}, {"target_name": "Zhu Yilong", "start_time": 162.44, "end_time": 164.44}, {"target_name": "Zhu Yilong", "start_time": 167.24, "end_time": 168.84}, {"target_name": "Zhu Yilong", "start_time": 172.44, "end_time": 187.24}, {"target_name": "Zhu Yilong", "start_time": 189.24, "end_time": 190.84}, {"target_name": "Zhu Yilong", "start_time": 195.64, "end_time": 196.04}, {"target_name": "Zhu Yilong", "start_time": 198.44, "end_time": 198.84}, {"target_name": "Zhu Yilong", "start_time": 204.04, "end_time": 207.24}, {"target_name": "Zhu Yilong", "start_time": 212.44, "end_time": 213.24}, {"target_name": "Zhu Yilong", "start_time": 224.44, "end_time": 226.44}, {"target_name": "Zhu Yilong", "start_time": 236.44, "end_time": 237.24}, {"target_name": "Zhu Yilong", "start_time": 250.84, "end_time": 251.64}, {"target_name": "Zhu Yilong", "start_time": 257.64, "end_time": 262.04}, {"target_name": "Zhu Yilong", "start_time": 272.44, "end_time": 297.64}, {"target_name": "Zhu Yilong", "start_time": 323.64, "end_time": 331.24}]}
+19-11-20 00:11:37 - identify-result: {"appearance_time": [{"target_name": "Zhu Yilong", "start_time": 0.04, "end_time": 1.24}, {"target_name": "Zhu Yilong", "start_time": 2.04, "end_time": 4.04}, {"target_name": "Zhu Yilong", "start_time": 44.84, "end_time": 47.24}, {"target_name": "Zhu Yilong", "start_time": 48.04, "end_time": 49.64}, {"target_name": "Zhu Yilong", "start_time": 91.64, "end_time": 92.44}, {"target_name": "Zhu Yilong", "start_time": 96.84, "end_time": 118.04}, {"target_name": "Zhu Yilong", "start_time": 121.24, "end_time": 127.64}, {"target_name": "Zhu Yilong", "start_time": 129.64, "end_time": 130.04}, {"target_name": "Zhu Yilong", "start_time": 131.24, "end_time": 132.84}, {"target_name": "Zhu Yilong", "start_time": 134.44, "end_time": 139.64}, {"target_name": "Zhu Yilong", "start_time": 140.84, "end_time": 147.24}, {"target_name": "Zhu Yilong", "start_time": 155.24, "end_time": 160.04}, {"target_name": "Zhu Yilong", "start_time": 162.44, "end_time": 164.44}, {"target_name": "Zhu Yilong", "start_time": 167.24, "end_time": 168.84}, {"target_name": "Zhu Yilong", "start_time": 172.44, "end_time": 187.24}, {"target_name": "Zhu Yilong", "start_time": 189.24, "end_time": 190.84}, {"target_name": "Zhu Yilong", "start_time": 195.64, "end_time": 196.04}, {"target_name": "Zhu Yilong", "start_time": 198.44, "end_time": 198.84}, {"target_name": "Zhu Yilong", "start_time": 204.04, "end_time": 207.24}, {"target_name": "Zhu Yilong", "start_time": 212.44, "end_time": 213.24}, {"target_name": "Zhu Yilong", "start_time": 224.44, "end_time": 226.44}, {"target_name": "Zhu Yilong", "start_time": 236.44, "end_time": 237.24}, {"target_name": "Zhu Yilong", "start_time": 250.84, "end_time": 251.64}, {"target_name": "Zhu Yilong", "start_time": 257.64, "end_time": 262.04}, {"target_name": "Zhu Yilong", "start_time": 272.44, "end_time": 297.64}, {"target_name": "Zhu Yilong", "start_time": 323.64, "end_time": 331.24}]}
+19-11-20 00:11:37 - inputURL - result: {"appearance_time": [{"target_name": "Zhu Yilong", "start_time": 0.04, "end_time": 1.24}, {"target_name": "Zhu Yilong", "start_time": 2.04, "end_time": 4.04}, {"target_name": "Zhu Yilong", "start_time": 44.84, "end_time": 47.24}, {"target_name": "Zhu Yilong", "start_time": 48.04, "end_time": 49.64}, {"target_name": "Zhu Yilong", "start_time": 91.64, "end_time": 92.44}, {"target_name": "Zhu Yilong", "start_time": 96.84, "end_time": 118.04}, {"target_name": "Zhu Yilong", "start_time": 121.24, "end_time": 127.64}, {"target_name": "Zhu Yilong", "start_time": 129.64, "end_time": 130.04}, {"target_name": "Zhu Yilong", "start_time": 131.24, "end_time": 132.84}, {"target_name": "Zhu Yilong", "start_time": 134.44, "end_time": 139.64}, {"target_name": "Zhu Yilong", "start_time": 140.84, "end_time": 147.24}, {"target_name": "Zhu Yilong", "start_time": 155.24, "end_time": 160.04}, {"target_name": "Zhu Yilong", "start_time": 162.44, "end_time": 164.44}, {"target_name": "Zhu Yilong", "start_time": 167.24, "end_time": 168.84}, {"target_name": "Zhu Yilong", "start_time": 172.44, "end_time": 187.24}, {"target_name": "Zhu Yilong", "start_time": 189.24, "end_time": 190.84}, {"target_name": "Zhu Yilong", "start_time": 195.64, "end_time": 196.04}, {"target_name": "Zhu Yilong", "start_time": 198.44, "end_time": 198.84}, {"target_name": "Zhu Yilong", "start_time": 204.04, "end_time": 207.24}, {"target_name": "Zhu Yilong", "start_time": 212.44, "end_time": 213.24}, {"target_name": "Zhu Yilong", "start_time": 224.44, "end_time": 226.44}, {"target_name": "Zhu Yilong", "start_time": 236.44, "end_time": 237.24}, {"target_name": "Zhu Yilong", "start_time": 250.84, "end_time": 251.64}, {"target_name": "Zhu Yilong", "start_time": 257.64, "end_time": 262.04}, {"target_name": "Zhu Yilong", "start_time": 272.44, "end_time": 297.64}, {"target_name": "Zhu Yilong", "start_time": 323.64, "end_time": 331.24}]}
+19-11-20 00:11:37 - start to clip video (2019-11-20-00-06-35) by target(Zhu Yilong):
+19-11-20 00:11:37 - create_directory
+19-11-20 00:11:37 - create: identify/static/2019-11-20-00-06-35
+19-11-20 00:11:37 - Successfully created the directory identify/static/2019-11-20-00-06-35 
+19-11-20 00:11:37 - create: identify/static/2019-11-20-00-06-35/Zhu Yilong
+19-11-20 00:11:37 - Successfully created the directory identify/static/2019-11-20-00-06-35/Zhu Yilong 
+19-11-20 00:11:37 - identify/static/2019-11-20-00-06-35/Zhu Yilong/000.mp4 : 0.04 ~ 1.24
+19-11-20 00:11:38 - identify/static/2019-11-20-00-06-35/Zhu Yilong/001.mp4 : 2.04 ~ 4.04
+19-11-20 00:11:39 - identify/static/2019-11-20-00-06-35/Zhu Yilong/002.mp4 : 44.84 ~ 47.24
+19-11-20 00:11:41 - identify/static/2019-11-20-00-06-35/Zhu Yilong/003.mp4 : 48.04 ~ 49.64
+19-11-20 00:11:43 - identify/static/2019-11-20-00-06-35/Zhu Yilong/004.mp4 : 91.64 ~ 92.44
+19-11-20 00:11:45 - identify/static/2019-11-20-00-06-35/Zhu Yilong/005.mp4 : 96.84 ~ 118.04
+19-11-20 00:11:58 - identify/static/2019-11-20-00-06-35/Zhu Yilong/006.mp4 : 121.24 ~ 127.64
+19-11-20 00:12:03 - identify/static/2019-11-20-00-06-35/Zhu Yilong/007.mp4 : 129.64 ~ 130.04
+19-11-20 00:12:03 - identify/static/2019-11-20-00-06-35/Zhu Yilong/008.mp4 : 131.24 ~ 132.84
+19-11-20 00:12:05 - identify/static/2019-11-20-00-06-35/Zhu Yilong/009.mp4 : 134.44 ~ 139.64
+19-11-20 00:12:10 - identify/static/2019-11-20-00-06-35/Zhu Yilong/010.mp4 : 140.84 ~ 147.24
+19-11-20 00:12:14 - identify/static/2019-11-20-00-06-35/Zhu Yilong/011.mp4 : 155.24 ~ 160.04
+19-11-20 00:12:18 - identify/static/2019-11-20-00-06-35/Zhu Yilong/012.mp4 : 162.44 ~ 164.44
+19-11-20 00:12:20 - identify/static/2019-11-20-00-06-35/Zhu Yilong/013.mp4 : 167.24 ~ 168.84
+19-11-20 00:12:21 - identify/static/2019-11-20-00-06-35/Zhu Yilong/014.mp4 : 172.44 ~ 187.24
+19-11-20 00:12:30 - identify/static/2019-11-20-00-06-35/Zhu Yilong/015.mp4 : 189.24 ~ 190.84
+19-11-20 00:12:32 - identify/static/2019-11-20-00-06-35/Zhu Yilong/016.mp4 : 195.64 ~ 196.04
+19-11-20 00:12:32 - identify/static/2019-11-20-00-06-35/Zhu Yilong/017.mp4 : 198.44 ~ 198.84
+19-11-20 00:12:33 - identify/static/2019-11-20-00-06-35/Zhu Yilong/018.mp4 : 204.04 ~ 207.24
+19-11-20 00:12:37 - identify/static/2019-11-20-00-06-35/Zhu Yilong/019.mp4 : 212.44 ~ 213.24
+19-11-20 00:12:38 - identify/static/2019-11-20-00-06-35/Zhu Yilong/020.mp4 : 224.44 ~ 226.44
+19-11-20 00:12:40 - identify/static/2019-11-20-00-06-35/Zhu Yilong/021.mp4 : 236.44 ~ 237.24
+19-11-20 00:12:41 - identify/static/2019-11-20-00-06-35/Zhu Yilong/022.mp4 : 250.84 ~ 251.64
+19-11-20 00:12:42 - identify/static/2019-11-20-00-06-35/Zhu Yilong/023.mp4 : 257.64 ~ 262.04
+19-11-20 00:12:46 - identify/static/2019-11-20-00-06-35/Zhu Yilong/024.mp4 : 272.44 ~ 297.64
+19-11-20 00:13:01 - identify/static/2019-11-20-00-06-35/Zhu Yilong/025.mp4 : 323.64 ~ 331.24
+19-11-20 00:13:07 - finish clipping
+19-11-20 00:13:07 - start to concatenate video
+19-11-20 00:13:07 - dirFiles : ['000.mp4', '001.mp4', '002.mp4', '003.mp4', '004.mp4', '005.mp4', '006.mp4', '007.mp4', '008.mp4', '009.mp4', '010.mp4', '011.mp4', '012.mp4', '013.mp4', '014.mp4', '015.mp4', '016.mp4', '017.mp4', '018.mp4', '019.mp4', '020.mp4', '021.mp4', '022.mp4', '023.mp4', '024.mp4', '025.mp4']
+19-11-20 00:13:07 - concatenate : 000.mp4
+19-11-20 00:13:07 - concatenate : 001.mp4
+19-11-20 00:13:07 - concatenate : 002.mp4
+19-11-20 00:13:07 - concatenate : 003.mp4
+19-11-20 00:13:07 - concatenate : 004.mp4
+19-11-20 00:13:08 - concatenate : 005.mp4
+19-11-20 00:13:08 - concatenate : 006.mp4
+19-11-20 00:13:08 - concatenate : 007.mp4
+19-11-20 00:13:08 - concatenate : 008.mp4
+19-11-20 00:13:08 - concatenate : 009.mp4
+19-11-20 00:13:09 - concatenate : 010.mp4
+19-11-20 00:13:09 - concatenate : 011.mp4
+19-11-20 00:13:09 - concatenate : 012.mp4
+19-11-20 00:13:09 - concatenate : 013.mp4
+19-11-20 00:13:09 - concatenate : 014.mp4
+19-11-20 00:13:09 - concatenate : 015.mp4
+19-11-20 00:13:10 - concatenate : 016.mp4
+19-11-20 00:13:10 - concatenate : 017.mp4
+19-11-20 00:13:10 - concatenate : 018.mp4
+19-11-20 00:13:10 - concatenate : 019.mp4
+19-11-20 00:13:11 - concatenate : 020.mp4
+19-11-20 00:13:11 - concatenate : 021.mp4
+19-11-20 00:13:11 - concatenate : 022.mp4
+19-11-20 00:13:11 - concatenate : 023.mp4
+19-11-20 00:13:11 - concatenate : 024.mp4
+19-11-20 00:13:12 - concatenate : 025.mp4
+19-11-20 00:13:19 - /Users/qing/Documents/GitHub/web_application_295/projvenv/lib/python3.6/site-packages/moviepy/video/io/ffmpeg_reader.py:130: UserWarning: Warning: in file identify/static/2019-11-20-00-06-35/Zhu Yilong/000.mp4, 2764800 bytes wanted but 0 bytes read,at frame 30/31, at time 1.20/1.22 sec. Using the last valid frame instead.
+  UserWarning)
 
-During handling of the above exception, another exception occurred:
+19-11-20 00:13:22 - /Users/qing/Documents/GitHub/web_application_295/projvenv/lib/python3.6/site-packages/moviepy/video/io/ffmpeg_reader.py:130: UserWarning: Warning: in file identify/static/2019-11-20-00-06-35/Zhu Yilong/002.mp4, 2764800 bytes wanted but 0 bytes read,at frame 60/61, at time 2.40/2.42 sec. Using the last valid frame instead.
+  UserWarning)
 
-Traceback (most recent call last):
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
-    response = get_response(request)
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
-    response = self.process_exception_by_middleware(e, request)
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-  File "/Users/shikimac/Desktop/295/Web_application_code/web_application_295/identify/views.py", line 151, in home
-    return render(request, 'channels/home.html', {'recent_channels':recent_channels})
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/shortcuts.py", line 36, in render
-    content = loader.render_to_string(template_name, context, request, using=using)
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/loader.py", line 61, in render_to_string
-    template = get_template(template_name, using=using)
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/loader.py", line 15, in get_template
-    return engine.get_template(template_name)
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/backends/django.py", line 34, in get_template
-    return Template(self.engine.get_template(template_name), self)
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/engine.py", line 143, in get_template
-    template, origin = self.find_template(template_name)
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/engine.py", line 125, in find_template
-    template = loader.get_template(name, skip=skip)
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/loaders/base.py", line 30, in get_template
-    contents, origin, origin.template_name, self.engine,
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/base.py", line 156, in __init__
-    self.nodelist = self.compile_nodelist()
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/base.py", line 194, in compile_nodelist
-    return parser.parse()
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/base.py", line 478, in parse
-    raise self.error(token, e)
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/base.py", line 476, in parse
-    compiled_result = compile_func(self, token)
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 266, in do_extends
-    nodelist = parser.parse()
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/base.py", line 478, in parse
-    raise self.error(token, e)
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/base.py", line 476, in parse
-    compiled_result = compile_func(self, token)
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/loader_tags.py", line 209, in do_block
-    nodelist = parser.parse(('endblock',))
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/base.py", line 478, in parse
-    raise self.error(token, e)
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/base.py", line 476, in parse
-    compiled_result = compile_func(self, token)
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 811, in do_for
-    nodelist_loop = parser.parse(('empty', 'endfor',))
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/base.py", line 478, in parse
-    raise self.error(token, e)
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/base.py", line 476, in parse
-    compiled_result = compile_func(self, token)
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/defaulttags.py", line 952, in do_if
-    nodelist = parser.parse(('elif', 'else', 'endif'))
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/base.py", line 472, in parse
-    self.invalid_block_tag(token, command, parse_until)
-  File "/Users/shikimac/Desktop/295/Web_application_code/projvenv/lib/python3.6/site-packages/django/template/base.py", line 528, in invalid_block_tag
-    get_text_list(["'%s'" % p for p in parse_until], 'or'),
-django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 32: 'endfor', expected 'elif', 'else' or 'endif'. Did you forget to register or load this tag?
+19-11-20 00:13:45 - /Users/qing/Documents/GitHub/web_application_295/projvenv/lib/python3.6/site-packages/moviepy/video/io/ffmpeg_reader.py:130: UserWarning: Warning: in file identify/static/2019-11-20-00-06-35/Zhu Yilong/008.mp4, 2764800 bytes wanted but 0 bytes read,at frame 40/41, at time 1.60/1.62 sec. Using the last valid frame instead.
+  UserWarning)
+
+19-11-20 00:13:58 - /Users/qing/Documents/GitHub/web_application_295/projvenv/lib/python3.6/site-packages/moviepy/video/io/ffmpeg_reader.py:130: UserWarning: Warning: in file identify/static/2019-11-20-00-06-35/Zhu Yilong/011.mp4, 2764800 bytes wanted but 0 bytes read,at frame 120/121, at time 4.80/4.82 sec. Using the last valid frame instead.
+  UserWarning)
+
+19-11-20 00:14:00 - /Users/qing/Documents/GitHub/web_application_295/projvenv/lib/python3.6/site-packages/moviepy/video/io/ffmpeg_reader.py:130: UserWarning: Warning: in file identify/static/2019-11-20-00-06-35/Zhu Yilong/013.mp4, 2764800 bytes wanted but 0 bytes read,at frame 40/41, at time 1.60/1.62 sec. Using the last valid frame instead.
+  UserWarning)
+
+19-11-20 00:14:17 - /Users/qing/Documents/GitHub/web_application_295/projvenv/lib/python3.6/site-packages/moviepy/video/io/ffmpeg_reader.py:130: UserWarning: Warning: in file identify/static/2019-11-20-00-06-35/Zhu Yilong/020.mp4, 2764800 bytes wanted but 0 bytes read,at frame 50/51, at time 2.00/2.02 sec. Using the last valid frame instead.
+  UserWarning)
+
+19-11-20 00:14:39 - /Users/qing/Documents/GitHub/web_application_295/projvenv/lib/python3.6/site-packages/moviepy/video/io/ffmpeg_reader.py:130: UserWarning: Warning: in file identify/static/2019-11-20-00-06-35/Zhu Yilong/024.mp4, 2764800 bytes wanted but 0 bytes read,at frame 630/631, at time 25.20/25.22 sec. Using the last valid frame instead.
+  UserWarning)
+
+19-11-20 00:14:46 - finish concatenating : 2019-11-20-00-06-35/Zhu Yilong/Zhu Yilong.mp4
+19-11-20 00:14:46 - saving video: Channel object (4) 2019-11-20-00-06-35/Zhu Yilong/Zhu Yilong.mp4
+19-11-20 00:14:46 - making new video time: 0:03:09.535191
+19-11-20 00:14:46 - ===== channel: TEST video: [EN SUB] 20191111 朱一龍竟然用便當盒裝隱形眼鏡？突擊檢查朱一龍的洗漱包！｜Zhu Yilong‘s Toiletries Bag Spot-check! gogoboi專訪 target: Zhu Yilong is done ====
