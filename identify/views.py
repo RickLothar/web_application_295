@@ -88,7 +88,10 @@ def history(request):
     return render(request, 'history.html', context)
 
 def home(request):
-    recent_channels = Channel.objects.all().order_by('-id')[:3]
+    recent_channels = Channel.objects.all().order_by('-id')[:5]
+    # for i in recent_channels:
+    #     print(i.id)
+    # print(recent_channels)
     # recent_channels = []
     return render(request, 'channels/home.html', {'recent_channels':recent_channels})
 
