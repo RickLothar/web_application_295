@@ -83,6 +83,7 @@ def identify_video(input_video, target_name):
             result.setdefault('appearance_time',[])
             last_appearance = False
             last_last_appearance = False
+            duration = False
             while True:
                 # new
                 frame_gap += 1
@@ -92,7 +93,7 @@ def identify_video(input_video, target_name):
                 if frame_gap % 10 != 1:
                     continue
                 # new
-                if ret is False and last_appearance:
+                if ret is False and duration:
                     appearnace = {}
                     appearnace["target_name"] = result_names
                     appearnace["start_time"] = start_time
@@ -107,7 +108,7 @@ def identify_video(input_video, target_name):
                     frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)  # resize frame (optional)
                 except Exception as e:
                     print("resize error:" + str(e))
-                    break;
+                    break
                 # frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)  # resize frame (optional)
 
                 curTime = time.time() + 1  # calc fps
@@ -167,15 +168,23 @@ def identify_video(input_video, target_name):
                             # print(best_class_probabilities)
                             if best_class_probabilities > 0.56 and HumanNames[best_class_indices[0] == target_name]:
                                 # new
-                                if not last_appearance:
+                                if duration:
+                                    end_time = timestamp
+                                elif not last_appearance:
                                     start_time = timestamp
-                                    last_appearance = True
+                                    end_time = timestamp
+                                    duration = True
+                                if last_appearance:
+                                    last_last_appearance = True
+                                else:
+                                    last_last_appearance = False
+                                last_appearance = True
                                 # cv2.rectangle(frame, (bb[i][0], bb[i][1]), (bb[i][2], bb[i][3]), (0, 255, 0),
                                 #               2)  # boxing face
 
                                 # plot result idx under box
-                                text_x = bb[i][0]
-                                text_y = bb[i][3] + 20
+                                # text_x = bb[i][0]
+                                # text_y = bb[i][3] + 20
                                 print('Result Indices: ', best_class_indices[0])
                                 print(HumanNames)
                                 for H_i in HumanNames:
@@ -187,33 +196,35 @@ def identify_video(input_video, target_name):
                             # new
                             else:
                                 if last_appearance:
-                                    end_time = timestamp
-                                    last_appearance = False
                                     last_last_appearance = True
                                 # 如果连续两次人脸识别失败，则判定人脸持续时间结束
-                                elif last_last_appearance:
-                                    appearnace = {}
-                                    appearnace["target_name"] = result_names
-                                    appearnace["start_time"] = start_time
-                                    appearnace["end_time"] = end_time
-                                    result['appearance_time'].append(appearnace)
-                                    appearance_time.append([start_time, end_time])
+                                else:
+                                    if not last_last_appearance and duration:
+                                        appearnace = {}
+                                        appearnace["target_name"] = result_names
+                                        appearnace["start_time"] = start_time
+                                        appearnace["end_time"] = end_time
+                                        result['appearance_time'].append(appearnace)
+                                        appearance_time.append([start_time, end_time])
+                                        duration = False
                                     last_last_appearance = False
+                                last_appearance = False
                     else:
                         # new
                         if last_appearance:
-                            end_time = timestamp
-                            last_appearance = False
                             last_last_appearance = True
                         # 如果连续两次人脸识别失败，则判定人脸持续时间结束
-                        elif last_last_appearance:
-                            appearnace = {}
-                            appearnace["target_name"] = result_names
-                            appearnace["start_time"] = start_time
-                            appearnace["end_time"] = end_time
-                            result['appearance_time'].append(appearnace)
-                            appearance_time.append([start_time, end_time])
+                        else:
+                            if not last_last_appearance and duration:
+                                appearnace = {}
+                                appearnace["target_name"] = result_names
+                                appearnace["start_time"] = start_time
+                                appearnace["end_time"] = end_time
+                                result['appearance_time'].append(appearnace)
+                                appearance_time.append([start_time, end_time])
+                                duration = False
                             last_last_appearance = False
+                        last_appearance = False
                         print('Alignment Failure')
                     # new
                     print('Timestamp: ', timestamp)
