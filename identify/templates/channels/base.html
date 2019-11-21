@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="By Team NZND">
 
-  <title>Favorite Actors Clips</title>
+  <title>Idol Chaser</title>
 
   <!-- Bootstrap core CSS -->
   {% comment %} <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet"> {% endcomment %}
@@ -29,7 +29,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'home' %}">Favorite Actors Clips</a>
+      <a class="navbar-brand" href="{% url 'home' %}">Idol Chaser</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -58,7 +58,7 @@
   </nav>
 
   {% comment %} <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white border-bottom shadow-sm">
-    <h5 class="my-0 mr-md-auto font-weight-normal"><a href="{% url 'home' %}" class="text-dark">Favorite Actors Clips</a></h5>
+    <h5 class="my-0 mr-md-auto font-weight-normal"><a href="{% url 'home' %}" class="text-dark">Idol Chaser</a></h5>
     <nav class="my-2 my-md-0 mr-md-3">
       {% if user.is_authenticated %}
       <a class="p-2 text-dark" href="{% url 'dashboard' %}">Dashboard</a>
