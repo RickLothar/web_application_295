@@ -3,7 +3,7 @@
 <header class="masthead text-center text-white">
     <div class="masthead-content">
       <div class="container">
-        <h1 class="masthead-heading mb-0">Only watch the one you loves</h1>
+        <h1 class="masthead-heading mb-0">Only watch the one you love</h1>
         <h2 class="masthead-subheading mb-0">Create your own channels for your favriote idols</h2>
         <a href="{% url 'create_channel' %}" class="btn btn-primary btn-xl rounded-pill mt-5">Create Your channel</a>
       </div>
@@ -24,10 +24,17 @@
 </section> {% endcomment %}
 
 <div class="container">
-  <h1 class="text-center">Recent Channels</h1>
+  <div class="masthead">
+    <div class="masthead-content">
+      <div class="container">
+        <h1 class="display-3 text-center mt-2">Recent Channels</h1>
+      </div>
+    </div>
+  </div>
   {% for channel in recent_channels %}
     {% if channel.videoonline_set.all %}
-      <h2><a href="{% url 'detail_channel' channel.id %}">{{ channel.title }}</a></h2>
+      <h2 class="display-4">{{ channel.title }}</h2>
+      <a href="{% url 'detail_channel' channel.id %}" class="btn btn-secondary rounded-pill">Watch this channel</a>
       <div class="row">
       {% for video in channel.videoonline_set.all %}
         <div class="col-md-4 mt-3">
