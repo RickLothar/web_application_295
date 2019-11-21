@@ -148,3 +148,5 @@ dic = {"Angelababy": "1",
        "Angel Wang": "25",
        "Joker Xue": "25",
        "Justin Huang": "25"}
+
+target_list = [(k, k) for k in sorted(dic.keys())]

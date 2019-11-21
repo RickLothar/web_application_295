@@ -9,9 +9,11 @@
     {% for channel in channels %}
 
     <h2><a href="{% url 'detail_channel' channel.id %}">{{ channel.title }}</a></h2>
-    <a href="{% url 'delete_channel' channel.id %}" class="btn btn-danger">Delete</a>
-    <a href="{% url 'update_channel' channel.id %}" class="btn btn-primary">Edit</a>
     <a href="{% url 'add_video' channel.id %}" class="btn btn-primary">Add Video</a>
+    <a href="{% url 'update_channel' channel.id %}" class="btn btn-primary">Edit</a>
+    <a href="{% url 'delete_channel' channel.id %}" class="btn btn-danger">Delete</a>
+    
+    
 
     <div class="row">
       {% for video in channel.videoonline_set.all %}
@@ -21,8 +23,8 @@
           <div class="card-body">
             <p class="card-text">{{ video.title }}</p>
             {% if user.id == channel.user.id %}
-            <a href="{% url 'delete_video' video.id %}" class="btn btn-danger">Delete</a>
             <a href="{% url 'detail_video' video.id %}" class="btn btn-secondary">Watch Clips</a>
+            <a href="{% url 'delete_video' video.id %}" class="btn btn-danger">Delete</a>
             {% endif %}
           </div>
         </div>
