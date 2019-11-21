@@ -35,7 +35,7 @@
 
     <div class='row'>
       {% if clippedvideo and clippedvideo.file_name  %}
-        <video width='100%' height= '600' controls>
+        <video controls width='100%' height= '600' controls>
           <source src="{% static clippedvideo.file_name %}" type="video/mp4">
           Your browser does not support the video tag.
         </video>
