@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'vxmjxl2%6$=!1z--iy=%w&*)+npu9jxgh2^zij2jrqv!)fwqxq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['https://idol-chaser.herokuapp.com/', 'https://www.idol-chaser.herokuapp.com/']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -79,7 +79,10 @@ WSGI_APPLICATION = 'web_application.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 
@@ -126,7 +129,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
