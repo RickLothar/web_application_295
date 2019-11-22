@@ -46,9 +46,12 @@ def getTarget_fromResult(resultjson, target_name) :
 	result = json.loads(resultjson)
 	new_result = {}
 	new_result.setdefault('appearance_time',[])
+	count = 0
 	for key in result['appearance_time']:
 		if key['target_name'] == target_name  and key['start_time'] != key['end_time']:
 			new_result['appearance_time'].append(key)
+			count = count+1
+	logging.info("Start to clip %s video by result", str(count))
 	return new_result
 
 def getAll_fromResult(resultjson) :

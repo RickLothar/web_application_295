@@ -221,6 +221,7 @@ def identify_video(input_video, target_name):
                                 appearnace["start_time"] = start_time
                                 appearnace["end_time"] = end_time
                                 result['appearance_time'].append(appearnace)
+                                print(appearnace)
                                 appearance_time.append([start_time, end_time])
                                 duration = False
                             last_last_appearance = False
@@ -229,7 +230,6 @@ def identify_video(input_video, target_name):
                     # new
                     print('Timestamp: ', timestamp)
                     print('Appearance Time: ', appearance_time)
-                    print('result', result)
 
                 # c+=1
                 # cv2.imshow('Video', frame)
