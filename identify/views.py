@@ -162,7 +162,13 @@ def DetailVideoRender(request, pk):
 		clippedvideo = result.output
 	except ObjectDoesNotExist:
 		clippedvideo = ''
-	return render(request, 'channels/detail_video.html', {'videoonline':videoonline, 'clippedvideo':clippedvideo})
+	context = {
+		'videoonline':videoonline,
+		'clippedvideo':clippedvideo,
+		'result':result,
+	}
+
+	return render(request, 'channels/detail_video.html', context)
 
 class DetailVideo(generic.DetailView):
     model = VideoOnline
