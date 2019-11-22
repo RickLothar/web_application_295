@@ -237,5 +237,6 @@ def identify_video(input_video, target_name):
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
             video_capture.release()
+            print('result: ',result)
             # cv2.destroyAllWindows()
             return json.dumps(result)

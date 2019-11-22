@@ -18,6 +18,10 @@ class VideoOnline(models.Model):
     def __str__(self):
         return self.title
 
+class View(models.Model):
+	type = models.CharField(max_length=200)
+	count = models.IntegerField(default=0)
+
 
 class Result(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular result')
@@ -27,6 +31,7 @@ class Result(models.Model):
     output =  models.ForeignKey('Video', on_delete=models.SET_NULL, null=True, related_name='output_video')
     target_name = models.CharField(max_length=200)
     target_result = models.CharField(max_length=200)
+    percentage = models.FloatField(default=0)
     def __str__(self):
         return f'{self.id}'
     def get_absolute_url(self):
