@@ -166,7 +166,7 @@ def identify_video(input_video, target_name):
                             print(HumanNames[best_class_indices[0]], ' with accuracy ', best_class_probabilities)
 
                             # print(best_class_probabilities)
-                            if best_class_probabilities > 0.56 and HumanNames[best_class_indices[0] == target_name]:
+                            if best_class_probabilities > 0.62 and HumanNames[best_class_indices[0]] == target_name:
                                 # new
                                 if duration:
                                     end_time = timestamp
