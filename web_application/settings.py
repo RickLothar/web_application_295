@@ -26,7 +26,7 @@ SECRET_KEY = 'vxmjxl2%6$=!1z--iy=%w&*)+npu9jxgh2^zij2jrqv!)fwqxq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://idol-chaser.herokuapp.com/', 'https://www.idol-chaser.herokuapp.com/']
 
 
 # Application definition
