@@ -5,7 +5,7 @@
 ### webstie : http://127.0.0.1:8000/
 
 ### admin: http://127.0.0.1:8000/admin  
-Branch Test
+
 username: admin password:123
 
 ### 1. create a virtualenv with python 3.6 (do not use python 3.7, this will fail the tenserflow install)
