@@ -2,11 +2,12 @@
 import logging
 import os
 from moviepy.editor import VideoFileClip, concatenate_videoclips
+from .models import Result
 
 input_path = "identify/face_recognition/video/"
 generated_path = "identify/static/"
 
-def extract_video_by_target(result, filename, target) :
+def extract_video_by_target(videoonline, result, filename, target) :
 	logging.info('start to clip video (%s) by target(%s):', filename, target)
 	input_video_path = input_path + filename + ".mp4"
 	create_directory(filename, target)
@@ -29,6 +30,7 @@ def extract_video_by_target(result, filename, target) :
 	percentage = total_appear_time / clip.duration
 	percentage = round(percentage*100, 2)
 	logging.info('appear percentage: %s', str(percentage))
+	Result.objects.filter(videoonline=videoonline).update(percentage=percentage, length=round(clip.duration,2))
 	return percentage
 
 def concatenate_video(filename, target) :

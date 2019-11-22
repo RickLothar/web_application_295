@@ -32,6 +32,7 @@ class Result(models.Model):
     target_name = models.CharField(max_length=200)
     target_result = models.CharField(max_length=200)
     percentage = models.FloatField(default=0)
+    length = models.FloatField(default=0)
     def __str__(self):
         return f'{self.id}'
     def get_absolute_url(self):

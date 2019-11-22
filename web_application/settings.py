@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'identify',
     'widget_tweaks',
+    'googlecharts',
 ]
 
 MIDDLEWARE = [

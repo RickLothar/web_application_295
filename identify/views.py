@@ -138,9 +138,6 @@ def add_video(request, pk):
                 identify_thread = threading.Thread(target=inputURLThread, args=(channel, video, target))
                 identify_thread.start()
 
-                # # Take Result output filepath by VideoOnline
-                # result = Result.objects.get(videoonline=video)
-                # logging.info("view -- result: %s", result.output.file_name)
                 return redirect('detail_channel', pk)
             else:
                 errors = form._errors.setdefault('url', ErrorList())
