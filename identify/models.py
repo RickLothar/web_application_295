@@ -30,7 +30,7 @@ class Result(models.Model):
     video =  models.ForeignKey('Video', on_delete=models.SET_NULL, null=True, related_name='input_video')
     output =  models.ForeignKey('Video', on_delete=models.SET_NULL, null=True, related_name='output_video')
     target_name = models.CharField(max_length=200)
-    target_result = models.CharField(max_length=200)
+    target_result = models.TextField()
     percentage = models.FloatField(default=0)
     length = models.FloatField(default=0)
     def __str__(self):
