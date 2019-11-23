@@ -1,0 +1,602 @@
+[
+  {
+  "celebrity": "Zhu Yilong", 
+  "number_of_chosen_as_target": 658
+  },
+  {
+  "celebrity": "Angelababy", 
+  "number_of_chosen_as_target": 86
+  },
+  {
+  "celebrity": "Annie Yi", 
+  "number_of_chosen_as_target": 19
+  },
+  {
+  "celebrity": "He Jiong", 
+  "number_of_chosen_as_target": 189
+  },
+    {
+  "celebrity": "Ni Ni", 
+  "number_of_chosen_as_target": 37
+  },
+  {
+  "celebrity": "Qiao Zhenyu", 
+  "number_of_chosen_as_target": 32
+  },
+   {
+  "celebrity": "Andy liu", 
+  "number_of_chosen_as_target": 43
+  },
+   {
+  "celebrity": "Feng Timo", 
+  "number_of_chosen_as_target": 127
+  },
+   {
+  "celebrity": "Gulnazar", 
+  "number_of_chosen_as_target": 205
+  },
+   {
+  "celebrity": "Hua Chenyu", 
+  "number_of_chosen_as_target": 386
+  },
+   {
+  "celebrity": "Liu Haoran", 
+  "number_of_chosen_as_target": 305
+  },
+   {
+  "celebrity": "Sandra Ng", 
+  "number_of_chosen_as_target": 16
+  },
+     {
+  "celebrity": "Emma Wu", 
+  "number_of_chosen_as_target": 128
+  },
+     {
+  "celebrity": "Kenji Wu", 
+  "number_of_chosen_as_target": 123
+  },
+     {
+  "celebrity": "Kris Wu", 
+  "number_of_chosen_as_target": 69
+  },
+     {
+  "celebrity": "TZUYU", 
+  "number_of_chosen_as_target": 209
+  },
+     {
+  "celebrity": "Wu Jing", 
+  "number_of_chosen_as_target": 173
+  },
+     {
+  "celebrity": "Zhou Dongyu", 
+  "number_of_chosen_as_target": 227
+  },
+       {
+  "celebrity": "Bibi Zhou", 
+  "number_of_chosen_as_target": 159
+  },
+       {
+  "celebrity": "Nicky Wu", 
+  "number_of_chosen_as_target": 53
+  },
+       {
+  "celebrity": "Tiffany Tang", 
+  "number_of_chosen_as_target": 245
+  },
+       {
+  "celebrity": "Wu Tsing-Fong", 
+  "number_of_chosen_as_target": 360
+  },
+       {
+  "celebrity": "Wu Xiubo", 
+  "number_of_chosen_as_target": 78
+  },
+       {
+  "celebrity": "Zhou Xun", 
+  "number_of_chosen_as_target": 209
+  },
+       {
+  "celebrity": "Jay Chou", 
+  "number_of_chosen_as_target": 661
+  },
+       {
+  "celebrity": "Lou Yixiao", 
+  "number_of_chosen_as_target": 40
+  },
+       {
+  "celebrity": "Nick Chou", 
+  "number_of_chosen_as_target": 21
+  },
+       {
+  "celebrity": "Stephen Chow", 
+  "number_of_chosen_as_target": 509
+  },
+       {
+  "celebrity": "Sun Li", 
+  "number_of_chosen_as_target": 371
+  },
+       {
+  "celebrity": "Tang Yixin", 
+  "number_of_chosen_as_target": 152
+  },
+       {
+  "celebrity": "Ady An", 
+  "number_of_chosen_as_target": 87
+  },
+       {
+  "celebrity": "Chow Yun-fat", 
+  "number_of_chosen_as_target": 298
+  },
+       {
+  "celebrity": "Meng Meiqi", 
+  "number_of_chosen_as_target": 398
+  },
+       {
+  "celebrity": "Sun Yi", 
+  "number_of_chosen_as_target": 67
+  },
+       {
+  "celebrity": "Tang Guoqiang", 
+  "number_of_chosen_as_target": 21
+  },
+        {
+  "celebrity": "Yao Ming", 
+  "number_of_chosen_as_target": 193
+  },
+      {
+  "celebrity": "Cecilia Cheung", 
+  "number_of_chosen_as_target": 268
+  },
+       {
+  "celebrity": "Harlem Yu", 
+  "number_of_chosen_as_target": 106
+  },
+       {
+  "celebrity": "Jenny Zhang", 
+  "number_of_chosen_as_target": 51
+  },
+       {
+  "celebrity": "Jiang Wen", 
+  "number_of_chosen_as_target": 102
+  },
+       {
+  "celebrity": "Maggie Cheung", 
+  "number_of_chosen_as_target": 132
+  },
+       {
+  "celebrity": "Zhang Yishan", 
+  "number_of_chosen_as_target": 254
+  },
+    {
+  "celebrity": "Angela Chang", 
+  "number_of_chosen_as_target": 231
+  },
+    {
+  "celebrity": "Dicky Cheung", 
+  "number_of_chosen_as_target": 41
+  },
+    {
+  "celebrity": "Jacky Cheung", 
+  "number_of_chosen_as_target": 95
+  },
+    {
+  "celebrity": "Lay", 
+  "number_of_chosen_as_target": 403
+  },
+    {
+  "celebrity": "Zhang Xinyi", 
+  "number_of_chosen_as_target": 17
+  },
+    {
+  "celebrity": "Zhang Yuqi", 
+  "number_of_chosen_as_target": 84
+  },
+      {
+  "celebrity": "Barbie Hsu", 
+  "number_of_chosen_as_target": 39
+  },
+      {
+  "celebrity": "Chang Chen-yue", 
+  "number_of_chosen_as_target": 59
+  },
+      {
+  "celebrity": "Dee Hsu", 
+  "number_of_chosen_as_target": 45
+  },
+      {
+  "celebrity": "Eddie Peng", 
+  "number_of_chosen_as_target": 457
+  },
+      {
+  "celebrity": "Lala Hsu", 
+  "number_of_chosen_as_target": 312
+  },
+      {
+  "celebrity": "Zhang Ruoyun", 
+  "number_of_chosen_as_target": 206
+  },
+      {
+  "celebrity": "Cathy Tsui", 
+  "number_of_chosen_as_target": 7
+  },
+      {
+  "celebrity": "Jackie Chan", 
+  "number_of_chosen_as_target": 249
+  },
+      {
+  "celebrity": "Ming Dao", 
+  "number_of_chosen_as_target": 61
+  },
+      {
+  "celebrity": "Qi Wei", 
+  "number_of_chosen_as_target": 82
+  },
+      {
+  "celebrity": "Vivian Hsu", 
+  "number_of_chosen_as_target": 105
+  },
+      {
+  "celebrity": "Xu Zheng", 
+  "number_of_chosen_as_target": 293
+  },
+      {
+  "celebrity": "Athena Chu", 
+  "number_of_chosen_as_target": 113
+  },
+      {
+  "celebrity": "Kai-Fu Lee", 
+  "number_of_chosen_as_target": 47
+  },
+      {
+  "celebrity": "Li Ronghao", 
+  "number_of_chosen_as_target": 291
+  },
+      {
+  "celebrity": "Li Yifeng", 
+  "number_of_chosen_as_target": 418
+  },
+      {
+  "celebrity": "Rainie Yang", 
+  "number_of_chosen_as_target": 232
+  },
+      {
+  "celebrity": "Zhu Dan", 
+  "number_of_chosen_as_target": 19
+  },
+      {
+  "celebrity": "JJ Lin", 
+  "number_of_chosen_as_target": 508
+  },
+      {
+  "celebrity": "Li Xiaolu", 
+  "number_of_chosen_as_target": 130
+  },
+      {
+  "celebrity": "Tony Yang", 
+  "number_of_chosen_as_target": 9
+  },
+      {
+  "celebrity": "Yang Chaoyue", 
+  "number_of_chosen_as_target": 476
+  },
+      {
+  "celebrity": "Yang Mi", 
+  "number_of_chosen_as_target": 304
+  },
+      {
+  "celebrity": "Yang Yang", 
+  "number_of_chosen_as_target": 379
+  },
+      {
+  "celebrity": "Jimmy Lin", 
+  "number_of_chosen_as_target": 57
+  },
+      {
+  "celebrity": "Ko Chen-tung", 
+  "number_of_chosen_as_target": 2
+  },
+      {
+  "celebrity": "Lin Chi-ling", 
+  "number_of_chosen_as_target": 137
+  },
+      {
+  "celebrity": "Liu Yan", 
+  "number_of_chosen_as_target": 28
+  },
+      {
+  "celebrity": "Nana Ou-Yang", 
+  "number_of_chosen_as_target": 328
+  },
+      {
+  "celebrity": "Yoga Lin", 
+  "number_of_chosen_as_target": 409
+  },
+      {
+  "celebrity": "Jiang Shuying", 
+  "number_of_chosen_as_target": 284
+  },
+      {
+  "celebrity": "Jiro Wang", 
+  "number_of_chosen_as_target": 82
+  },
+      {
+  "celebrity": "Mao Buyi", 
+  "number_of_chosen_as_target": 309
+  },
+      {
+  "celebrity": "Tony Leung Chiu-wai", 
+  "number_of_chosen_as_target": 416
+  },
+      {
+  "celebrity": "Tracy Wang", 
+  "number_of_chosen_as_target": 24
+  },
+      {
+  "celebrity": "Ziwen Wang", 
+  "number_of_chosen_as_target": 117
+  },
+    {
+  "celebrity": "Cyndi Wang", 
+  "number_of_chosen_as_target": 61
+  },
+    {
+  "celebrity": "Hebe Tien", 
+  "number_of_chosen_as_target": 389
+  },
+    {
+  "celebrity": "Jackson Wang", 
+  "number_of_chosen_as_target": 539
+  },
+    {
+  "celebrity": "Karry Wang", 
+  "number_of_chosen_as_target": 472
+  },
+    {
+  "celebrity": "Vincent Chiao", 
+  "number_of_chosen_as_target": 123
+  },
+    {
+  "celebrity": "Wang Luodan", 
+  "number_of_chosen_as_target": 43
+  },
+    {
+  "celebrity": "Bai Baihe", 
+  "number_of_chosen_as_target": 51
+  },
+    {
+  "celebrity": "Bai Jingting", 
+  "number_of_chosen_as_target": 401
+  },
+    {
+  "celebrity": "Hu Ge", 
+  "number_of_chosen_as_target": 438
+  },
+    {
+  "celebrity": "Show Lo", 
+  "number_of_chosen_as_target": 249
+  },
+    {
+  "celebrity": "Shu Qi", 
+  "number_of_chosen_as_target": 135
+  },
+    {
+  "celebrity": "Zhang Ziyi", 
+  "number_of_chosen_as_target": 306
+  },
+    {
+  "celebrity": "Alec Su", 
+  "number_of_chosen_as_target": 211
+  },
+    {
+  "celebrity": "Cai Xukun", 
+  "number_of_chosen_as_target": 551
+  },
+    {
+  "celebrity": "Fan Bingbing", 
+  "number_of_chosen_as_target": 125
+  },
+    {
+  "celebrity": "Jam Hsiao", 
+  "number_of_chosen_as_target": 379
+  },
+    {
+  "celebrity": "Karen Mok", 
+  "number_of_chosen_as_target": 289
+  },
+    {
+  "celebrity": "Shu Chang", 
+  "number_of_chosen_as_target": 8
+  },
+    {
+  "celebrity": "Evan Yo", 
+  "number_of_chosen_as_target": 5
+  },
+    {
+  "celebrity": "Jolin Tsai", 
+  "number_of_chosen_as_target": 91
+  },
+    {
+  "celebrity": "Kay Tse", 
+  "number_of_chosen_as_target": 17
+  },
+    {
+  "celebrity": "Nicholas Yse", 
+  "number_of_chosen_as_target": 104
+  },
+    {
+  "celebrity": "Xie Na", 
+  "number_of_chosen_as_target": 271
+  },
+    {
+  "celebrity": "Xu Song", 
+  "number_of_chosen_as_target": 246
+  },
+    {
+  "celebrity": "Alyssa Chia", 
+  "number_of_chosen_as_target": 78
+  },
+    {
+  "celebrity": "Fei Yu-ching", 
+  "number_of_chosen_as_target": 72
+  },
+    {
+  "celebrity": "Jia Nailiang", 
+  "number_of_chosen_as_target": 69
+  },
+    {
+  "celebrity": "Tan Songyun", 
+  "number_of_chosen_as_target": 204
+  },
+    {
+  "celebrity": "Zhao Benshan", 
+  "number_of_chosen_as_target": 18
+  },
+    {
+  "celebrity": "Zhao Wei", 
+  "number_of_chosen_as_target": 339
+  },
+    {
+  "celebrity": "Calvin Chen", 
+  "number_of_chosen_as_target": 26
+  },
+    {
+  "celebrity": "Deng Chao", 
+  "number_of_chosen_as_target": 304
+  },
+    {
+  "celebrity": "Deng Lun", 
+  "number_of_chosen_as_target": 401
+  },
+    {
+  "celebrity": "Dilraba Dilmurat", 
+  "number_of_chosen_as_target": 417
+  },
+    {
+  "celebrity": "G.E.M.", 
+  "number_of_chosen_as_target": 426
+  },
+    {
+  "celebrity": "Haden Kuo", 
+  "number_of_chosen_as_target": 59
+  },
+    {
+  "celebrity": "Aaron Kwok", 
+  "number_of_chosen_as_target": 81
+  },
+    {
+  "celebrity": "Amber Kuo", 
+  "number_of_chosen_as_target": 103
+  },
+    {
+  "celebrity": "Aya Liu", 
+  "number_of_chosen_as_target": 42
+  },
+    {
+  "celebrity": "Guo Jingming", 
+  "number_of_chosen_as_target": 31
+  },
+    {
+  "celebrity": "Michelle Chen", 
+  "number_of_chosen_as_target": 130
+  },
+    {
+  "celebrity": "Takeshi Kaneshiro", 
+  "number_of_chosen_as_target": 362
+  },
+    {
+  "celebrity": "Eason Chan", 
+  "number_of_chosen_as_target": 478
+  },
+    {
+  "celebrity": "Grace Chan", 
+  "number_of_chosen_as_target": 3
+  },
+    {
+  "celebrity": "Joe Chen", 
+  "number_of_chosen_as_target": 15
+  },
+    {
+  "celebrity": "Kelly Chen", 
+  "number_of_chosen_as_target": 12
+  },
+    {
+  "celebrity": "Wallace Chung", 
+  "number_of_chosen_as_target": 54
+  },
+    {
+  "celebrity": "Wiliam Chan", 
+  "number_of_chosen_as_target": 398
+  },
+    {
+  "celebrity": "Cheer Chen", 
+  "number_of_chosen_as_target": 151
+  },
+    {
+  "celebrity": "Chen He", 
+  "number_of_chosen_as_target": 76
+  },
+    {
+  "celebrity": "David Tao", 
+  "number_of_chosen_as_target": 85
+  },
+    {
+  "celebrity": "Gao Yuanyuan", 
+  "number_of_chosen_as_target": 264
+  },
+    {
+  "celebrity": "Han Geng", 
+  "number_of_chosen_as_target": 147
+  },
+    {
+  "celebrity": "Ju Jingyi", 
+  "number_of_chosen_as_target": 406
+  },
+    {
+  "celebrity": "Chen Duling", 
+  "number_of_chosen_as_target": 251
+  },
+    {
+  "celebrity": "Huang Bo", 
+  "number_of_chosen_as_target": 336
+  },
+    {
+  "celebrity": "Huang Xiaoming", 
+  "number_of_chosen_as_target": 259
+  },
+    {
+  "celebrity": "Lu Han", 
+  "number_of_chosen_as_target": 504
+  },
+    {
+  "celebrity": "Steve Ma", 
+  "number_of_chosen_as_target": 5
+  },
+    {
+  "celebrity": "Wei Daxun", 
+  "number_of_chosen_as_target": 71
+  },
+    {
+  "celebrity": "Angel Wang", 
+  "number_of_chosen_as_target": 60
+  },
+    {
+  "celebrity": "Benny Sa", 
+  "number_of_chosen_as_target": 267
+  },
+    {
+  "celebrity": "Joker Xue", 
+  "number_of_chosen_as_target": 197
+  },
+    {
+  "celebrity": "Justin Huang", 
+  "number_of_chosen_as_target": 380
+  },
+    {
+  "celebrity": "Wowkie Zhang", 
+  "number_of_chosen_as_target": 97
+  },
+    {
+  "celebrity": "Wu Xin", 
+  "number_of_chosen_as_target": 12
+  }
+]

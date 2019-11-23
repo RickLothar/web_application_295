@@ -1,38 +1,49 @@
 {% extends 'channels/base.html' %}
 {% block content %}
-<div class="container">
-  <div class="text-center">
-    <h1>{{ user.username }}'s Channels</h1>
-    <a href="{% url 'create_channel' %}" class="btn btn-primary">Create New Channel</a>
-  </div>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
 
-    {% for channel in channels %}
+        var prepopular = "{{popular}}";
+        console.log(prepopular)
+        var popular = JSON.parse(prepopular.replace(/&quot;/g,'"'));
+        console.log(popular)
 
-    <h2><a href="{% url 'detail_channel' channel.id %}">{{ channel.title }}</a></h2>
-    <a href="{% url 'add_video' channel.id %}" class="btn btn-primary">Add Video</a>
-    <a href="{% url 'update_channel' channel.id %}" class="btn btn-primary">Edit</a>
-    <a href="{% url 'delete_channel' channel.id %}" class="btn btn-danger">Delete</a>
-    
-    
+        google.charts.load('current', {'packages':['timeline']});
+        google.charts.setOnLoadCallback(drawChart);
 
-    <div class="row">
-      {% for video in channel.videoonline_set.all %}
-      <div class="col-md-4 mt-3">
-        <div class="card mb-4 shadow-sm">
-          <iframe width="100%" height="225" src="https://www.youtube.com/embed/{{ video.youtube_id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <div class="card-body">
-            <p class="card-text">{{ video.title }}</p>
-            {% if user.id == channel.user.id %}
-            <a href="{% url 'detail_video' video.id %}" class="btn btn-secondary">Watch Clips</a>
-            <a href="{% url 'delete_video' video.id %}" class="btn btn-danger">Delete</a>
-            {% endif %}
-          </div>
-        </div>
+        function drawChart() {
+          var container = document.getElementById('timeline');
+          var chart = new google.visualization.Timeline(container);
+
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Celebrity Name');
+          data.addColumn('number', 'Start');
+          data.addColumn('number', 'End');
+
+          data.addRows(150);
+
+          var i;
+          for (i = 0; i < 150; i++) {
+            data.setCell(i, 0, popular[i]['celebrity']);
+            console.log(popular[i]['celebrity'])
+            data.setCell(i, 1, 0);
+            data.setCell(i, 2, popular[i]['number_of_chosen_as_target']);
+            console.log(popular[i]['number_of_chosen_as_target'])
+          }
+             chart.draw(data);
+         }
+      
+    </script>
+  </head>
+
+  <body>
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1 class="jumbotron-heading">Trending</h1>
       </div>
-      {% endfor %}
-    </div>
-    <br />
-    {% endfor %}
+    </section>
 
-</div>
+      <div id="timeline"  style="height: 500px;"></div>
+  </body>
 {% endblock %}

@@ -29,6 +29,7 @@ import urllib
 import requests
 import threading
 from django.core.exceptions import ObjectDoesNotExist
+from collections import OrderedDict
 
 YOUTUBE_API_KEY = 'AIzaSyDuPOQeKiEuzblKFRIOSI2XID9MAkqLiCE'
 
@@ -159,14 +160,26 @@ def trending(request):
 	with open(popular_json_path) as json_file:
 		data = json.load(json_file)
 		popular = {}
+		order_popular = {}
+		count = 0
 		for p in data:
 			celebrity = {}
 			celebrity['celebrity'] = str(p['celebrity'])
-			celebrity['number_of_chosen_as_target:'] = p['number_of_chosen_as_target']
-			print('celebrity: ', celebrity['celebrity'])
-			print('number_of_chosen_as_target: ', celebrity['number_of_chosen_as_target:'])
-			print('')
-	return render(request, 'trending.html')
+			celebrity['number_of_chosen_as_target'] = int(p['number_of_chosen_as_target'])
+			popular[count]=celebrity
+			count = count+1
+		ordered = OrderedDict(sorted(popular.items(), key=lambda i: i[1]['number_of_chosen_as_target'], reverse=True))
+		count = 0
+		for p in ordered.items():
+			celebrity = {}
+			celebrity['celebrity'] = p[1]['celebrity']
+			celebrity['number_of_chosen_as_target'] = int(p[1]['number_of_chosen_as_target'])
+			order_popular[count]=celebrity
+			count = count+1
+
+		ordered_json = json.dumps(order_popular)
+
+	return render(request, 'trending.html', {'popular':ordered_json})
 
 
 def DetailVideoRender(request, pk):
