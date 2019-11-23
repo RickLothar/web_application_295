@@ -4,14 +4,13 @@
 <head>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-  if(result){
+  var result_exists = "{{result}}"
+  if(result_exists){
     var target_name = "{{result.target_name}}";
     var target_result = "{{result.target_result}}";
     var length = "{{result.length}}";
     var result = JSON.parse(target_result.replace(/&quot;/g,'"'));
-    console.log(result)
     result = result.appearance_time
-    console.log("====")
     console.log(result)
     google.charts.load('current', {'packages':['timeline']});
     google.charts.setOnLoadCallback(drawChart);
