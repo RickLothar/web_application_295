@@ -184,7 +184,7 @@ def trending(request):
 
 def DetailVideoRender(request, pk):
 	videoonline = VideoOnline.objects.get(pk=pk)
-	addViewCount('', videoonline)
+	# addViewCount('', videoonline)
 	try :
 		result = Result.objects.get(videoonline=videoonline)
 		clippedvideo = result.output
@@ -255,7 +255,7 @@ class CreateChannel(LoginRequiredMixin, generic.CreateView):
 
 def DetailChannelRender(request, pk):
 	channel = Channel.objects.get(pk=pk)
-	addViewCount(channel, '')
+	# addViewCount(channel, '')
 	return render(request, 'channels/detail_channel.html', {'channel':channel})
 
 class DetailChannel(generic.DetailView):
