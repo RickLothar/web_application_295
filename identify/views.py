@@ -32,6 +32,8 @@ from django.core.exceptions import ObjectDoesNotExist
 
 YOUTUBE_API_KEY = 'AIzaSyDuPOQeKiEuzblKFRIOSI2XID9MAkqLiCE'
 
+popular_json_path = 'identify/static/popular_celebrity.json'
+
 
 def userlogin(request):
     if request.method == 'POST':
@@ -89,9 +91,6 @@ def history(request):
         'history': history_obj,
     }
     return render(request, 'history.html', context)
-
-def trending(request):
-    return render(request, 'trending.html')
 
 def home(request):
     recent_channels = Channel.objects.all().order_by('-id')[:5]
@@ -155,17 +154,34 @@ def inputURLThread(channel, video, target) :
 	inputURL(channel, video, target)
 	logging.info('===== channel: %s video: %s target: %s is done ====' , channel.title, video.title, target)
 
+def trending(request):
+	 
+	with open(popular_json_path) as json_file:
+		data = json.load(json_file)
+		popular = {}
+		for p in data:
+			celebrity = {}
+			celebrity['celebrity'] = str(p['celebrity'])
+			celebrity['number_of_chosen_as_target:'] = p['number_of_chosen_as_target']
+			print('celebrity: ', celebrity['celebrity'])
+			print('number_of_chosen_as_target: ', celebrity['number_of_chosen_as_target:'])
+			print('')
+	return render(request, 'trending.html')
+
 
 def DetailVideoRender(request, pk):
 	videoonline = VideoOnline.objects.get(pk=pk)
 	try :
 		result = Result.objects.get(videoonline=videoonline)
 		clippedvideo = result.output
+		save_times = int(result.length * (100-result.percentage) / 100)
+		save_minute = int(save_times/60)
+		save_second = save_times - (save_minute*60)
 	except ObjectDoesNotExist:
 		clippedvideo = ''
-	save_times = int(result.length * (100-result.percentage) / 100)
-	save_minute = int(save_times/60)
-	save_second = save_times - (save_minute*60)
+		save_minute = 'N/A'
+		save_second = 'N/A'
+		result =''
 
 	context = {
 		'videoonline':videoonline,
