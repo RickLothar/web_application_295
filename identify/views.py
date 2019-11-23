@@ -17,6 +17,7 @@ import uuid
 import logging
 import json
 import datetime
+import time
 from .form import inputURLForm, VideoOnlineForm
 from .models import Result, Channel, Video, VideoOnline
 from .identify_video_from_url import inputURL
@@ -159,10 +160,16 @@ def DetailVideoRender(request, pk):
 		clippedvideo = result.output
 	except ObjectDoesNotExist:
 		clippedvideo = ''
+	save_times = int(result.length * (100-result.percentage) / 100)
+	save_minute = int(save_times/60)
+	save_second = save_times - (save_minute*60)
+
 	context = {
 		'videoonline':videoonline,
 		'clippedvideo':clippedvideo,
 		'result':result,
+		'save_minute':save_minute,
+		'save_second':save_second,
 	}
 
 	return render(request, 'channels/detail_video.html', context)
