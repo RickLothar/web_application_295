@@ -29,8 +29,11 @@ import urllib
 import requests
 import threading
 from django.core.exceptions import ObjectDoesNotExist
+from collections import OrderedDict
 
 YOUTUBE_API_KEY = 'AIzaSyDuPOQeKiEuzblKFRIOSI2XID9MAkqLiCE'
+
+popular_json_path = 'identify/static/popular_celebrity.json'
 
 
 def userlogin(request):
@@ -152,17 +155,46 @@ def inputURLThread(channel, video, target) :
 	inputURL(channel, video, target)
 	logging.info('===== channel: %s video: %s target: %s is done ====' , channel.title, video.title, target)
 
+def trending(request):
+	 
+	with open(popular_json_path) as json_file:
+		data = json.load(json_file)
+		popular = {}
+		order_popular = {}
+		count = 0
+		for p in data:
+			celebrity = {}
+			celebrity['celebrity'] = str(p['celebrity'])
+			celebrity['number_of_chosen_as_target'] = int(p['number_of_chosen_as_target'])
+			popular[count]=celebrity
+			count = count+1
+		ordered = OrderedDict(sorted(popular.items(), key=lambda i: i[1]['number_of_chosen_as_target'], reverse=True))
+		count = 0
+		for p in ordered.items():
+			celebrity = {}
+			celebrity['celebrity'] = p[1]['celebrity']
+			celebrity['number_of_chosen_as_target'] = int(p[1]['number_of_chosen_as_target'])
+			order_popular[count]=celebrity
+			count = count+1
+
+		ordered_json = json.dumps(order_popular)
+
+	return render(request, 'trending.html', {'popular':ordered_json})
+
 
 def DetailVideoRender(request, pk):
 	videoonline = VideoOnline.objects.get(pk=pk)
 	try :
 		result = Result.objects.get(videoonline=videoonline)
 		clippedvideo = result.output
+		save_times = int(result.length * (100-result.percentage) / 100)
+		save_minute = int(save_times/60)
+		save_second = save_times - (save_minute*60)
 	except ObjectDoesNotExist:
 		clippedvideo = ''
-	save_times = int(result.length * (100-result.percentage) / 100)
-	save_minute = int(save_times/60)
-	save_second = save_times - (save_minute*60)
+		save_minute = 'N/A'
+		save_second = 'N/A'
+		result =''
 
 	context = {
 		'videoonline':videoonline,
