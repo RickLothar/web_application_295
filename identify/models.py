@@ -19,12 +19,12 @@ class VideoOnline(models.Model):
         return self.title
 
 class ViewCount(models.Model):
-	id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular ViewCount')
+	title = models.CharField(max_length=255, null=True)
 	count = models.IntegerField(default=0)
 	videoonline = models.ForeignKey('VideoOnline', on_delete=models.SET_NULL, null=True)
 	channel = models.ForeignKey(Channel, on_delete=models.SET_NULL, null=True)
 	def __str__(self):
-		return f'{self.id}'
+		return self.title
 
 class Result(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular result')

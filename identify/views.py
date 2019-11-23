@@ -292,7 +292,7 @@ def addViewCount(channel, videoonline) :
 			count = channel_add.count + 1
 			ViewCount.objects.filter(channel=channel).update(count=count)
 		except ObjectDoesNotExist:
-			channel_add = ViewCount.objects.create(channel=channel, count=1)
+			channel_add = ViewCount.objects.create(channel=channel, count=1, title=channel.title)
 			channel_add.save()
 		logging.info("channel : %s add one more view count: %d", channel.title, channel_add.count)
 		print("channel: " + channel.title + " add one more view count: " + str(channel_add.count))
@@ -302,7 +302,7 @@ def addViewCount(channel, videoonline) :
 			count = video_add.count + 1
 			ViewCount.objects.filter(videoonline=videoonline).update(count=count)
 		except ObjectDoesNotExist:
-			video_add = ViewCount.objects.create(videoonline=videoonline, count=1)
+			video_add = ViewCount.objects.create(videoonline=videoonline, count=1, title=videoonline.title)
 			video_add.save()
 		logging.info("video : %s add one more view count: %d", videoonline.title, video_add.count)
 		print("video: " +videoonline.title + " add one more view count: " + str(video_add.count))
