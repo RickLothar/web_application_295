@@ -19,7 +19,7 @@ import json
 import datetime
 import time
 from .form import inputURLForm, VideoOnlineForm
-from .models import Result, Channel, Video, VideoOnline
+from .models import Result, Channel, Video, VideoOnline, ViewCount
 from .identify_video_from_url import inputURL
 
 from django.http import Http404, JsonResponse
@@ -184,6 +184,7 @@ def trending(request):
 
 def DetailVideoRender(request, pk):
 	videoonline = VideoOnline.objects.get(pk=pk)
+	addViewCount('', videoonline)
 	try :
 		result = Result.objects.get(videoonline=videoonline)
 		clippedvideo = result.output
@@ -252,6 +253,11 @@ class CreateChannel(LoginRequiredMixin, generic.CreateView):
         super(CreateChannel, self).form_valid(form)
         return redirect('dashboard')
 
+def DetailChannelRender(request, pk):
+	channel = Channel.objects.get(pk=pk)
+	addViewCount(channel, '')
+	return render(request, 'channels/detail_channel.html', {'channel':channel})
+
 class DetailChannel(generic.DetailView):
     model = Channel
     template_name = 'channels/detail_channel.html'
@@ -278,3 +284,27 @@ class DeleteChannel(LoginRequiredMixin, generic.DeleteView):
         if not channel.user == self.request.user:
             raise Http404
         return channel
+
+def addViewCount(channel, videoonline) :
+	if channel:
+		try :
+			channel_add = ViewCount.objects.get(channel=channel)
+			count = channel_add.count + 1
+			ViewCount.objects.filter(channel=channel).update(count=count)
+		except ObjectDoesNotExist:
+			channel_add = ViewCount.objects.create(channel=channel, count=1)
+			channel_add.save()
+		logging.info("channel : %s add one more view count: %d", channel.title, channel_add.count)
+		print("channel: " + channel.title + " add one more view count: " + str(channel_add.count))
+	if videoonline:
+		try :
+			video_add = ViewCount.objects.get(videoonline=videoonline)
+			count = video_add.count + 1
+			ViewCount.objects.filter(videoonline=videoonline).update(count=count)
+		except ObjectDoesNotExist:
+			video_add = ViewCount.objects.create(videoonline=videoonline, count=1)
+			video_add.save()
+		logging.info("video : %s add one more view count: %d", videoonline.title, video_add.count)
+		print("video: " +videoonline.title + " add one more view count: " + str(video_add.count))
+
+
