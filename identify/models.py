@@ -19,6 +19,7 @@ class VideoOnline(models.Model):
         return self.title
 
 class ViewCount(models.Model):
+	id = models.AutoField(auto_created=True, primary_key=True)
 	title = models.CharField(max_length=255, null=True)
 	count = models.IntegerField(default=0)
 	videoonline = models.ForeignKey('VideoOnline', on_delete=models.SET_NULL, null=True)
@@ -27,7 +28,7 @@ class ViewCount(models.Model):
 		return self.title
 
 class Result(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular result')
+    id = models.AutoField(auto_created=True, primary_key=True)
     channel = models.ForeignKey(Channel, on_delete=models.SET_NULL, null=True)
     videoonline = models.ForeignKey('VideoOnline', on_delete=models.SET_NULL, null=True)
     video =  models.ForeignKey('Video', on_delete=models.SET_NULL, null=True, related_name='input_video')
@@ -39,13 +40,13 @@ class Result(models.Model):
     def __str__(self):
         return f'{self.id}'
     def get_absolute_url(self):
-        return reverse('result-detail', args=[str(self.id)])
+        return reverse('result-detail', args=[str(self.uuid)])
 
 class Video(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular video')
+    id = models.AutoField(auto_created=True, primary_key=True)
     channel = models.ForeignKey(Channel, on_delete=models.SET_NULL, null=True)
     file_name = models.CharField(max_length=200)
     def __str__(self):
         return f'{self.id}'
     def get_absolute_url(self):
-        return reverse('video-detail', args=[str(self.id)])
+        return reverse('video-detail', args=[str(self.uuid)])

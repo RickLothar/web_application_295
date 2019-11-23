@@ -37,7 +37,7 @@ def inputURL(channel, videoonline, target):
 		extract_video_by_target(videoonline, result, filename, target)
 		output_filepath = concatenate_video(filename, target)
 		output_video = saving_video(channel, output_filepath)
-		Result.objects.filter(id=result_obj.id).update(output=output_video)
+		Result.objects.filter(videoonline=videoonline).update(output=output_video)
 		b = datetime.datetime.now()
 		logging.info("making new video time: %s", str(b-a))
 
@@ -60,12 +60,12 @@ def getAll_fromResult(resultjson) :
 
 def saving_video(channel, new_file) :
 	logging.info('saving video: %s %s', channel, new_file)
-	new_video = Video.objects.create(id=uuid.uuid4(), channel=channel, file_name=new_file)
+	new_video = Video.objects.create(channel=channel, file_name=new_file)
 	new_video.save()
 	return new_video
 
 def saving_result(channel, videoonline, input_video, target_name, target_result) :
 	logging.info('saving result: %s %s %s %s',channel, input_video.file_name, target_name, target_result)
-	new_result = Result.objects.create(id=uuid.uuid4(), channel=channel, videoonline=videoonline, video=input_video, target_name=target_name, target_result=target_result)
+	new_result = Result.objects.create(channel=channel, videoonline=videoonline, video=input_video, target_name=target_name, target_result=target_result)
 	new_result.save()
 	return  new_result
