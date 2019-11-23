@@ -34,7 +34,7 @@ def inputURL(channel, videoonline, target):
 
 	if result['appearance_time']: 
 		a = datetime.datetime.now()
-		extract_video_by_target(result, filename, target)
+		extract_video_by_target(videoonline, result, filename, target)
 		output_filepath = concatenate_video(filename, target)
 		output_video = saving_video(channel, output_filepath)
 		Result.objects.filter(id=result_obj.id).update(output=output_video)

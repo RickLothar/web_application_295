@@ -47,3 +47,5 @@ tqdm==4.38.0
 urllib3==1.25.7
 Werkzeug==0.16.0
 whitenoise==4.1.4
+django-qsstats-magic
+django-google-charts
