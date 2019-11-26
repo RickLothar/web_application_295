@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.urls import reverse_lazy
@@ -30,6 +30,7 @@ import requests
 import threading
 from django.core.exceptions import ObjectDoesNotExist
 from collections import OrderedDict
+from django.template.defaulttags import register
 
 YOUTUBE_API_KEY = 'AIzaSyDuPOQeKiEuzblKFRIOSI2XID9MAkqLiCE'
 
@@ -101,10 +102,21 @@ def home(request):
     # recent_channels = []
     return render(request, 'channels/home.html', {'recent_channels':recent_channels})
 
+@register.filter
+def get_item(dictionary, key):
+    return dictionary[key]
+
 @login_required
 def dashboard(request):
     channels = Channel.objects.filter(user=request.user)
-    return render(request, 'channels/dashboard.html', {'channels':channels})
+    query_result = Result.objects.filter(channel__in=channels)
+
+    video_result = {}
+    for q in query_result:
+    	if q.videoonline and q.output :
+	    	video_result[q.videoonline.youtube_id] = q.videoonline.title
+
+    return render(request, 'channels/dashboard.html', {'channels':channels, 'results':video_result})
 
 @login_required
 def add_video(request, pk):
@@ -156,7 +168,6 @@ def inputURLThread(channel, video, target) :
 	logging.info('===== channel: %s video: %s target: %s is done ====' , channel.title, video.title, target)
 
 def trending(request):
-	 
 	with open(popular_json_path) as json_file:
 		data = json.load(json_file)
 		popular = {}
@@ -164,23 +175,56 @@ def trending(request):
 		count = 0
 		for p in data:
 			celebrity = {}
-			celebrity['celebrity'] = str(p['celebrity'])
-			celebrity['number_of_chosen_as_target'] = int(p['number_of_chosen_as_target'])
+			celebrity['title'] = str(p['celebrity'])
+			celebrity['count'] = int(p['number_of_chosen_as_target'])
 			popular[count]=celebrity
 			count = count+1
-		ordered = OrderedDict(sorted(popular.items(), key=lambda i: i[1]['number_of_chosen_as_target'], reverse=True))
-		count = 0
-		for p in ordered.items():
-			celebrity = {}
-			celebrity['celebrity'] = p[1]['celebrity']
-			celebrity['number_of_chosen_as_target'] = int(p[1]['number_of_chosen_as_target'])
-			order_popular[count]=celebrity
-			count = count+1
 
+		ordered = OrderedDict(sorted(popular.items(), key=lambda i: i[1]['count'], reverse=True))
+		order_popular = createNewdic(ordered)
 		ordered_json = json.dumps(order_popular)
 
-	return render(request, 'trending.html', {'popular':ordered_json})
+	videoonline_viewcount_result = ViewCount.objects.filter(videoonline__isnull=False).order_by('-id')
+	channel_viewcount_result = ViewCount.objects.filter(channel__isnull=False).order_by('-id')
 
+	recent_channel = channel_viewcount_result[0]
+	recent_video = videoonline_viewcount_result[0]
+	print(recent_channel)
+	print(recent_video)
+
+	videoonline_viewcount = resultTodic(videoonline_viewcount_result)
+	channel_viewcount = resultTodic(channel_viewcount_result)
+
+	return render(request, 'trending.html', {'popular':ordered_json, 'videoonline': videoonline_viewcount, 
+		'channel':channel_viewcount, 'recent_channel':recent_channel, 'recent_video':recent_video})
+
+def resultTodic(input_result):
+	ouput_dic = {}
+	count = 0
+	for v in input_result: 
+		row = {}
+		row['title'] = v.title
+		row['count'] = v.count
+		ouput_dic[count]=row
+		count = count+1
+	ouput_dic = OrderedDict(sorted(ouput_dic.items(), key=lambda i: i[1]['count'], reverse=True))
+	print(ouput_dic)
+	ouput_dic = createNewdic(ouput_dic)
+	ouput_dic  = json.dumps(ouput_dic)
+	return ouput_dic
+
+def createNewdic(old):
+	new = {}
+	count = 0
+	for p in old.items():
+		celebrity = {}
+		celebrity['title'] = p[1]['title']
+		celebrity['count'] = int(p[1]['count'])
+		new[count]=celebrity
+		count = count+1
+		if count == 20:
+			break
+	return new
 
 def DetailVideoRender(request, pk):
 	videoonline = VideoOnline.objects.get(pk=pk)
@@ -255,8 +299,40 @@ class CreateChannel(LoginRequiredMixin, generic.CreateView):
 
 def DetailChannelRender(request, pk):
 	channel = Channel.objects.get(pk=pk)
+	query_result = Result.objects.filter(channel=channel)
+	video_result = {}
+	for q in query_result:
+		if q.videoonline and q.output :
+			video_result[q.videoonline.youtube_id] = q.videoonline.title
 	addViewCount(channel, '')
-	return render(request, 'channels/detail_channel.html', {'channel':channel})
+	return render(request, 'channels/detail_channel.html', {'channel':channel, 'results':video_result})
+
+def getChannelResult(request):
+	channel = request.POST.get('post_id')
+	query_result = Result.objects.filter(channel=channel)
+	video_result = {}
+	for q in query_result:
+		if q.videoonline and q.output :
+			video_result[q.videoonline.youtube_id] = q.videoonline.title
+
+	return HttpResponse(
+            json.dumps(video_result),
+            content_type="application/json"
+    )	
+
+def getDashboardResult(request):
+	username = request.POST.get('post_id')
+	channels = Channel.objects.filter(user=request.user)
+	query_result = Result.objects.filter(channel__in=channels)
+	video_result = {}
+	for q in query_result:
+		if q.videoonline and q.output :
+			video_result[q.videoonline.youtube_id] = q.videoonline.title
+
+	return HttpResponse(
+            json.dumps(video_result),
+            content_type="application/json"
+    )
 
 class DetailChannel(generic.DetailView):
     model = Channel

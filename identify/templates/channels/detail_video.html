@@ -78,12 +78,12 @@
     <br />
     <div class='row'>
         {% if clippedvideo %}
-          <h3 class='text-muted'>{{result.target_name}} appears {{result.percentage}} % of total time in this video</h3>
+          <h3 class='text-muted'>{{result.target_name}} appears&nbsp;</h3> <h3 style="color:#cc3300;"> {{result.percentage}} </h3><h3 class='text-muted'>% of total time in this video</h3>
         {% endif %}
     </div>
     <div class='row'>
         {% if clippedvideo %}
-          <h3 class='text-muted'>You have saved  {{save_minute}} minute(s) {{save_second}} second(s)</h3>
+          <h3 class='text-muted'>You have saved</h3><h3 style="color:#cc3300;">&nbsp;{{save_minute}}&nbsp;</h3> <h3 class='text-muted'>minute(s)</h3><h3 style="color:#cc3300;"> &nbsp;{{save_second}}&nbsp;</h3><h3 class='text-muted'> second(s)</h3>
         {% endif %}
     </div>
     <br />

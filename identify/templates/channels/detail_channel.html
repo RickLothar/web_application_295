@@ -1,5 +1,51 @@
 {% extends 'channels/base.html' %}
+{% load staticfiles %}
 {% block content %}
+<head>
+  <script type="text/javascript" src="{% static 'csrf.js' %}"></script>
+  <script type="text/javascript" src="{% static 'notify.js' %}"></script>
+  <script type="text/javascript" src="{% static 'notify.min.js' %}"></script>
+  <script>
+    var channel_obj = "{{channel}}";
+    console.log(channel_obj)
+    var checkInterval = 10; //seconds
+
+
+    var match = window.location.href.match(/channel\/([0-9]+)/);
+    console.log(match[1])
+    function get_result() {
+      console.log("send channel_result") // sanity check
+      $.ajax({
+          url : "channel_result", // the endpoint
+          type : "POST", // http method
+          data : { post_id :  match[1]}, // data sent with the post request
+
+          // handle a successful response
+          success : function(json) {
+              console.log(json); // log the returned json to the console
+              for(var key in json) {
+                console.log(key + "  " + json[key]); 
+                var element = document.getElementById(key);
+                if(element.innerHTML != "Watch Clips") {
+                  element.innerHTML="Watch Clips";
+                  element.style.removeProperty("background-color");
+                  element.classList.add("btn-secondary");
+                  $.notify(json[key] + " is ready!", "success");
+                }
+              }
+          },
+
+          // handle a non-successful response
+          error : function(xhr,errmsg,err) {
+          }
+      });
+    };
+
+    $(document).ready(function () {
+        setInterval(get_result, 1000 * checkInterval);
+    });
+  </script>
+</head>
 <div class="container">
 <h1>{{ channel.title }}</h1>
 <h4 class="text-muted">{{ channel.user.username }}</h4>
@@ -20,9 +66,12 @@
             {% comment %} <p class="card-text">{{ video.youtube_id }}</p> {% endcomment %}
             {% if user.id == channel.user.id %}
             <a href="{% url 'delete_video' video.id %}" class="btn btn-danger">Delete</a>
-            {% comment %} <a href="{% url 'detail_video' video.id %}" class="btn btn-secondary">Watch Clips</a> {% endcomment %}
             {% endif %}
-            <a href="{% url 'detail_video' video.id %}" class="btn btn-secondary">Watch Clips</a>
+            {% if video.youtube_id in results %}
+              <a href="{% url 'detail_video' video.id %}" id="{{video.youtube_id}}" class="btn btn-secondary">Watch Clips</a>
+              {% else %}
+              <a href="{% url 'detail_video' video.id %}" id="{{video.youtube_id}}" class="btn" style="background-color:grey">Processing Clips...</a>
+            {% endif %}
           </div>
         </div>
       </div>

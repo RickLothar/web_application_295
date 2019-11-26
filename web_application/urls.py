@@ -42,6 +42,8 @@ urlpatterns = [
     # path('video/<int:pk>/delete1', views.DeleteVideo.as_view(), name='delete_video1'),
     # path('video/<int:pk>', views.DetailVideo.as_view(), name='detail_video'),
     path('video/<int:pk>', views.DetailVideoRender, name='detail_video'),
+    path('channel/channel_result', views.getChannelResult, name='channel_result'),
+    path('dashboard_result', views.getDashboardResult, name='dashboard_result'),
 ]
 
 

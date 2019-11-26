@@ -47,7 +47,7 @@ def concatenate_video(filename, target) :
 			clips.append(VideoFileClip(output_video_path+file))
 
 	video = concatenate_videoclips(clips, method='compose')
-	video.write_videofile(output_video_path+new_video_name)
+	video.write_videofile(output_video_path+new_video_name, threads=4)
 	logging.info('finish concatenating : %s', filename + "/" + target + "/" + new_video_name)
 	return filename + "/" + target + "/" + new_video_name
 

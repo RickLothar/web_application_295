@@ -1,5 +1,51 @@
 {% extends 'channels/base.html' %}
+{% load staticfiles %}
 {% block content %}
+<head>
+  <script type="text/javascript" src="{% static 'csrf.js' %}"></script>
+  <script type="text/javascript" src="{% static 'notify.js' %}"></script>
+  <script type="text/javascript" src="{% static 'notify.min.js' %}"></script>
+  <script type="text/javascript">
+
+    var username = "{{user.username}}";
+    console.log(username)
+    var checkInterval = 10; //seconds
+
+    function get_result() {
+      console.log("send dashboard_result") // sanity check
+      $.ajax({
+          url : "dashboard_result", // the endpoint
+          type : "POST", // http method
+          data : { post_id :  username}, // data sent with the post request
+
+          // handle a successful response
+          success : function(json) {
+              console.log(json); // log the returned json to the console
+              for(var key in json) {
+                console.log(key + "  " + json[key]); 
+                var element = document.getElementById(key);
+                if(element.innerHTML != "Watch Clips") {
+                  element.innerHTML="Watch Clips";
+                  element.style.removeProperty("background-color");
+                  element.classList.add("btn-secondary");
+                  $.notify(json[key] + " is ready!", "success");
+                }
+              }
+          },
+
+          // handle a non-successful response
+          error : function(xhr,errmsg,err) {
+          }
+      });
+    };
+
+    $(document).ready(function () {
+        setInterval(get_result, 1000 * checkInterval);
+    });
+
+
+  </script>
+</head>
 <div class="container">
   <div class="text-center">
     <h1>{{ user.username }}'s Channels</h1>
@@ -12,8 +58,6 @@
     <a href="{% url 'add_video' channel.id %}" class="btn btn-primary">Add Video</a>
     <a href="{% url 'update_channel' channel.id %}" class="btn btn-primary">Edit</a>
     <a href="{% url 'delete_channel' channel.id %}" class="btn btn-danger">Delete</a>
-    
-    
 
     <div class="row">
       {% for video in channel.videoonline_set.all %}
@@ -23,8 +67,13 @@
           <div class="card-body">
             <p class="card-text">{{ video.title }}</p>
             {% if user.id == channel.user.id %}
-            <a href="{% url 'detail_video' video.id %}" class="btn btn-secondary">Watch Clips</a>
-            <a href="{% url 'delete_video' video.id %}" class="btn btn-danger">Delete</a>
+                <a href="{% url 'delete_video' video.id %}" class="btn btn-danger">Delete</a>
+              {% if video.youtube_id in results %}
+                <a href="{% url 'detail_video' video.id %}" id="{{video.youtube_id}}" class="btn btn-secondary">Watch Clips</a>
+                {% else %}
+                <a href="{% url 'detail_video' video.id %}" id="{{video.youtube_id}}" class="btn" style="background-color:grey">Processing Clips...</a>
+              {% endif %}
+              
             {% endif %}
           </div>
         </div>
