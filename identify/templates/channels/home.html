@@ -1,5 +1,55 @@
 {% extends 'channels/base.html' %}
 {% block content %}
+<head>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+$(window).on('load',function() {
+  $('.timeline').each(function() {
+
+      var target_name = $(this).attr('target_name');
+      var target_result = $(this).attr('target_result');
+      var length = $(this).attr('length');
+      var id = $(this).attr('id');
+      console.log(target_result)
+      console.log(target_name)
+      console.log(length)
+      var result = JSON.parse(target_result.replace(/&quot;/g,'"'));
+      result = result.appearance_time
+      console.log(result)
+      google.charts.load('current', {'packages':['timeline']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var container = document.getElementById(id);
+        var chart = new google.visualization.Timeline(container);
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Target Name');
+        data.addColumn('number', 'Start');
+        data.addColumn('number', 'End');
+
+        data.addRows(result.length+1);
+
+        data.setCell(0, 0, 'Total');
+        data.setCell(0, 1, 0);
+        data.setCell(0, 2, length*1000);
+        var i;
+        for (i = 0; i < result.length; i++) {
+          data.setCell(i+1, 0, 'Clip');
+          data.setCell(i+1, 1, result[i].start_time*1000);
+          data.setCell(i+1, 2, result[i].end_time*1000);
+          console.log(result[i].start_time)
+          console.log(result[i].end_time)
+        }
+
+           chart.draw(data);
+       }
+    
+  });
+});
+</script>
+</head>
+
 <header class="masthead text-center text-white">
     <div class="masthead-content">
       <div class="container">
@@ -43,11 +93,17 @@
             <div class="card-body">
               <p class="card-text">{{ video.title }}</p>
               {% if video.youtube_id in results %}
-                {% for result in video.result_set.all %}
-                <p> Watch {{result.percentage}}% concentrate of this video </p>
-                {% endfor %}
                 <a href="{% url 'detail_video' video.id %}" id="{{video.youtube_id}}" class="btn btn-secondary">Watch Clips</a>
-                {% else %}
+                <br>
+                <br>
+                {% for result in video.result_set.all %}
+
+                <p> Watch {{result.percentage}}% concentrate of this video </p>
+                <div class="timeline" id="{{video.youtube_id}}timeline" target_result="{{result.target_result}}" target_name="{{result.target_name}}" length="{{result.length}}">
+                </div>
+                {% endfor %}
+                
+              {% else %}
                 <a href="{% url 'detail_video' video.id %}" id="{{video.youtube_id}}" class="btn" style="background-color:grey">Processing Clips...</a>
               {% endif %}
             </div>
