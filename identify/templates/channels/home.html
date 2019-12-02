@@ -97,12 +97,10 @@ $(window).on('load',function() {
                 <br>
                 <br>
                 {% for result in video.result_set.all %}
-
-                <p> Watch {{result.percentage}}% concentrate of this video </p>
+                <p> {{result.target_name}} appears <span style="color:#cc3300;">{{result.percentage}}%</span> of this video </p>
                 <div class="timeline" id="{{video.youtube_id}}timeline" target_result="{{result.target_result}}" target_name="{{result.target_name}}" length="{{result.length}}">
                 </div>
                 {% endfor %}
-                
               {% else %}
                 <a href="{% url 'detail_video' video.id %}" id="{{video.youtube_id}}" class="btn" style="background-color:grey">Processing Clips...</a>
               {% endif %}
