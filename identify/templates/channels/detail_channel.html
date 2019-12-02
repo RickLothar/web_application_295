@@ -83,6 +83,9 @@
             <a href="{% url 'delete_video' video.id %}" class="btn btn-danger">Delete</a>
             {% endif %}
             {% if video.youtube_id in results %}
+              {% for result in video.result_set.all %}
+              <p> Watch {{result.percentage}}% concentrate of this video </p>
+              {% endfor %}
               <a href="{% url 'detail_video' video.id %}" id="{{video.youtube_id}}" class="btn btn-secondary">Watch Clips</a>
               {% else %}
               <a href="{% url 'detail_video' video.id %}" id="{{video.youtube_id}}" class="btn" style="background-color:grey">Processing Clips...</a>
