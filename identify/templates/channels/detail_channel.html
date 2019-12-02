@@ -84,7 +84,7 @@
             {% endif %}
             {% if video.youtube_id in results %}
               {% for result in video.result_set.all %}
-              <p> Watch {{result.percentage}}% essences of this video </p>
+              <p> {{result.target_name}} appears <span style="color:#cc3300;">{{result.percentage}}%</span> of this video </p>
               {% endfor %}
               <a href="{% url 'detail_video' video.id %}" id="{{video.youtube_id}}" class="btn btn-secondary">Watch Clips</a>
               {% else %}
