@@ -47,6 +47,23 @@
   <div class="container">
     <h1 class="jumbotron-heading">{{ videoonline.title }}</h1>
     <a href="{% url 'detail_channel' videoonline.channel.id %}">Return to channel {{ videoonline.channel.title }}</a>
+    <br>
+    <div class='share-buttons'>
+      <p> Share this video </p>
+      {% comment %} Facebook {% endcomment %}
+      <a href="http://www.facebook.com/sharer.php?u={{ request.build_absolute_uri }}" target="_blank">
+        <img src="{% static 'facebook.png' %}" alt="Facebook" />
+      </a>
+      {% comment %} Twitter {% endcomment %}
+      <a href="https://twitter.com/share?url={{ request.build_absolute_uri }}&amp;text=Check%20This%20Video%20Clips&amp;hashtags=idolchaser" target="_blank">
+        <img src="{% static 'twitter.png' %}" alt="Twitter" />
+      </a>
+      {% comment %} Reddit {% endcomment %}
+      <a href="http://reddit.com/submit?url={{ request.build_absolute_uri }}&amp;title={{ videoonline.title }} video clips" target="_blank">
+        <img src="{% static 'reddit.png' %}"  alt="Reddit" />
+      </a>
+    </div>
+
   </div>
 </section>
 <div class="container">
