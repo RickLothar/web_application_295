@@ -235,6 +235,10 @@ def DetailVideoRender(request, pk):
 		save_times = int(result.length * (100-result.percentage) / 100)
 		save_minute = int(save_times/60)
 		save_second = save_times - (save_minute*60)
+
+		original_length = convertTime(result.length)
+		clipped_length = convertTime(result.length*result.percentage*0.01)
+
 	except ObjectDoesNotExist:
 		clippedvideo = ''
 		save_minute = 'N/A'
@@ -247,9 +251,17 @@ def DetailVideoRender(request, pk):
 		'result':result,
 		'save_minute':save_minute,
 		'save_second':save_second,
+		'original_length' :  original_length,
+		'clipped_length' :  clipped_length,
 	}
 
 	return render(request, 'channels/detail_video.html', context)
+
+def convertTime(second):
+	m, s = divmod(second, 60)
+	h, m = divmod(m, 60)		
+	length = str(int(h)).zfill(2) + ":" + str(int(m)).zfill(2) + ":" + str(int(s)).zfill(2)
+	return length
 
 class DetailVideo(generic.DetailView):
     model = VideoOnline
