@@ -4,8 +4,10 @@ function drawchart(input, div_name, title) {
         var prepopular = input;
         console.log(prepopular)
 
-        var popular = JSON.parse(prepopular.replace(/&quot;/g,'"'));
-        // console.log(popular)
+        prepopular = prepopular.replace(/&quot;/g,'"');
+        console.log(prepopular)
+        var popular = JSON.parse(prepopular);
+        console.log(popular)
 
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
