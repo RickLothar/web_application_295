@@ -1,9 +1,13 @@
 {% extends 'channels/base.html' %}
+{% load staticfiles %}
 {% block content %}
 <head>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
+  var check_result = "{{result}}"
+
+  console.log(check_result)
 $(window).on('load',function() {
   $('.timeline').each(function() {
 
@@ -42,10 +46,33 @@ $(window).on('load',function() {
           console.log(result[i].end_time)
         }
 
-           chart.draw(data);
+        // set a padding value to cover the height of title and axis values
+        var paddingHeight = 40;
+        // set the height to be covered by the rows
+        var rowHeight = 6 * 15;
+        // set the total chart height
+        var chartHeight = rowHeight + paddingHeight;
+        
+        var options = {
+          vAxis: { ticks: [0,5,10,15,20] },
+          height: chartHeight
+        };
+
+          google.visualization.events.addListener(chart, 'ready', function () {
+            var labels = container.getElementsByTagName('text');
+            Array.prototype.forEach.call(labels, function(label) {
+              if (label.getAttribute('text-anchor') === 'middle') {
+                label.setAttribute('fill', '#ffffff');
+              }
+            });
+          });
+
+           chart.draw(data, options);
        }
     
   });
+
+
 });
 </script>
 </head>
