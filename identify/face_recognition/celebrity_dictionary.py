@@ -147,6 +147,12 @@ dic = {"Angelababy": "1",
        "Benny Sa": "25",
        "Angel Wang": "25",
        "Joker Xue": "25",
-       "Justin Huang": "25"}
+       "Justin Huang": "25",
+       "Adele": "26",
+       "Bruno Mars": "26",
+       "Chris Evans": "26",
+       "Jennifer Lawrence": "26",
+       "Robert Downey Jr": "26",
+       "Taylor Swift": "26"}
 
 target_list = [(k, k) for k in sorted(dic.keys())]
