@@ -2,9 +2,9 @@
 
 ### Recommend using Python 3.6 up
 
-### webstie : http://127.0.0.1:8000/
+### webstie : http://167.99.164.14/
 
-### admin: http://127.0.0.1:8000/admin  
+### admin: http://167.99.164.14/admin  
 
 username: admin password:123
 
