@@ -38,130 +38,130 @@ popular_json_path = 'identify/static/popular_celebrity.json'
 
 
 def userlogin(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request=request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password")
-            user = authenticate(username=username, password=password)
-            logging.info('username: %s password: %s', username, password)
-            if user is not None:
-                login(request, user)
-                return HttpResponseRedirect(reverse('input_url') )
-            else:
-                messages.error(request, "Invalid username or password.")
-        else:
-            messages.error(request, "Invalid username or password.")
-    # If this is a GET (or any other method) create the default form.
-    else : 
-        if request.user.is_authenticated:
-            return HttpResponseRedirect(reverse('home') )
-        else:
-            form = AuthenticationForm()
-            context = {
-                'form': form,
-            }
-            return render(request, 'login.html', context)
+	if request.method == 'POST':
+		form = AuthenticationForm(request=request, data=request.POST)
+		if form.is_valid():
+			username = form.cleaned_data.get("username")
+			password = form.cleaned_data.get("password")
+			user = authenticate(username=username, password=password)
+			logging.info('username: %s password: %s', username, password)
+			if user is not None:
+				login(request, user)
+				return HttpResponseRedirect(reverse('input_url') )
+			else:
+				messages.error(request, "Invalid username or password.")
+		else:
+			messages.error(request, "Invalid username or password.")
+	# If this is a GET (or any other method) create the default form.
+	else : 
+		if request.user.is_authenticated:
+			return HttpResponseRedirect(reverse('home') )
+		else:
+			form = AuthenticationForm()
+			context = {
+				'form': form,
+			}
+			return render(request, 'login.html', context)
 
 def userlogout(request):
-    logout(request)
-    return HttpResponseRedirect(reverse('home') )
+	logout(request)
+	return HttpResponseRedirect(reverse('home') )
 
 def signup(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            form = loginForm()
-            context = {
-                'form': form,
-            }
-            return HttpResponseRedirect(reverse('userlogin') )
-    else:
-        form = UserCreationForm()
-    return render(request, 'signup.html', {'form': form})
+	if request.method == 'POST':
+		form = UserCreationForm(request.POST)
+		if form.is_valid():
+			form.save()
+			username = form.cleaned_data.get('username')
+			raw_password = form.cleaned_data.get('password1')
+			user = authenticate(username=username, password=raw_password)
+			form = loginForm()
+			context = {
+				'form': form,
+			}
+			return HttpResponseRedirect(reverse('userlogin') )
+	else:
+		form = UserCreationForm()
+	return render(request, 'signup.html', {'form': form})
 
 def history(request):
-    if request.user.is_authenticated:
-        user = request.user
-    history_obj = Result.objects.all().filter(user=user)
-    # resultjson = history_obj.target_result
-    context = {
-        'history': history_obj,
-    }
-    return render(request, 'history.html', context)
+	if request.user.is_authenticated:
+		user = request.user
+	history_obj = Result.objects.all().filter(user=user)
+	# resultjson = history_obj.target_result
+	context = {
+		'history': history_obj,
+	}
+	return render(request, 'history.html', context)
 
 def home(request):
-    recent_channels = Channel.objects.all().order_by('-id')[:5]
-    query_result = Result.objects.filter(channel__in=recent_channels)
-    video_result = {}
-    for q in query_result:
-        if q.videoonline and q.output:
-            video_result[q.videoonline.youtube_id] = q.videoonline.title
+	recent_channels = Channel.objects.all().order_by('-id')[:5]
+	query_result = Result.objects.filter(channel__in=recent_channels)
+	video_result = {}
+	for q in query_result:
+		if q.videoonline and q.output:
+			video_result[q.videoonline.youtube_id] = q.videoonline.title
 
-    return render(request, 'channels/home.html', {'recent_channels':recent_channels, 'results':video_result})
+	return render(request, 'channels/home.html', {'recent_channels':recent_channels, 'results':video_result})
 
 @register.filter
 def get_item(dictionary, key):
-    return dictionary[key]
+	return dictionary[key]
 
 @login_required
 def dashboard(request):
-    channels = Channel.objects.filter(user=request.user)
-    query_result = Result.objects.filter(channel__in=channels)
+	channels = Channel.objects.filter(user=request.user)
+	query_result = Result.objects.filter(channel__in=channels)
 
-    video_result = {}
-    for q in query_result:
-    	if q.videoonline and q.output :
-	    	video_result[q.videoonline.youtube_id] = q.videoonline.title
+	video_result = {}
+	for q in query_result:
+		if q.videoonline and q.output :
+			video_result[q.videoonline.youtube_id] = q.videoonline.title
 
-    return render(request, 'channels/dashboard.html', {'channels':channels, 'results':video_result})
+	return render(request, 'channels/dashboard.html', {'channels':channels, 'results':video_result})
 
 @login_required
 def add_video(request, pk):
-    form = VideoOnlineForm()
-    channel = Channel.objects.get(pk=pk)
-    if not channel.user == request.user:
-        raise Http404
-    if request.method == 'POST':
-        form = VideoOnlineForm(request.POST)
-        if form.is_valid():
-            video = VideoOnline()
-            video.channel = channel
-            video.url = form.cleaned_data['url']
-            target = form.cleaned_data['target']
-            parsed_url = urllib.parse.urlparse(video.url)
-            video_id = urllib.parse.parse_qs(parsed_url.query).get('v')
-            
-            if video_id:
-                # check if this video is already in the database
-                prev_video = VideoOnline.objects.filter(youtube_id=video_id[0])
-                if (prev_video.values()):
-                    for i in prev_video.values():
-                        if pk == i['channel_id']:
-                            errors = form._errors.setdefault('url', ErrorList())
-                            errors.append('Your channel already inludes this video')
-                            return render(request, 'channels/add_video.html', {'form':form, 'channel':channel})
+	form = VideoOnlineForm()
+	channel = Channel.objects.get(pk=pk)
+	if not channel.user == request.user:
+		raise Http404
+	if request.method == 'POST':
+		form = VideoOnlineForm(request.POST)
+		if form.is_valid():
+			video = VideoOnline()
+			video.channel = channel
+			video.url = form.cleaned_data['url']
+			target = form.cleaned_data['target']
+			parsed_url = urllib.parse.urlparse(video.url)
+			video_id = urllib.parse.parse_qs(parsed_url.query).get('v')
+			
+			if video_id:
+				# check if this video is already in the database
+				prev_video = VideoOnline.objects.filter(youtube_id=video_id[0])
+				if (prev_video.values()):
+					for i in prev_video.values():
+						if pk == i['channel_id']:
+							errors = form._errors.setdefault('url', ErrorList())
+							errors.append('Your channel already inludes this video')
+							return render(request, 'channels/add_video.html', {'form':form, 'channel':channel})
 
-                video.youtube_id = video_id[0]
-                response = requests.get(f'https://www.googleapis.com/youtube/v3/videos?part=snippet&id={ video_id[0] }&key={ YOUTUBE_API_KEY }')
-                json = response.json()
-                title = json['items'][0]['snippet']['title']
-                video.title = title
-                video.save()
+				video.youtube_id = video_id[0]
+				response = requests.get(f'https://www.googleapis.com/youtube/v3/videos?part=snippet&id={ video_id[0] }&key={ YOUTUBE_API_KEY }')
+				json = response.json()
+				title = json['items'][0]['snippet']['title']
+				video.title = title
+				video.save()
 
-                identify_thread = threading.Thread(target=inputURLThread, args=(channel, video, target))
-                identify_thread.start()
+				identify_thread = threading.Thread(target=inputURLThread, args=(channel, video, target))
+				identify_thread.start()
 
-                return redirect('detail_channel', pk)
-            else:
-                errors = form._errors.setdefault('url', ErrorList())
-                errors.append('Must be a YouTube URL')
+				return redirect('detail_channel', pk)
+			else:
+				errors = form._errors.setdefault('url', ErrorList())
+				errors.append('Must be a YouTube URL')
 
-    return render(request, 'channels/add_video.html', {'form':form, 'channel':channel})
+	return render(request, 'channels/add_video.html', {'form':form, 'channel':channel})
 
 
 def inputURLThread(channel, video, target) : 
@@ -266,60 +266,62 @@ def convertTime(second):
 	return length
 
 class DetailVideo(generic.DetailView):
-    model = VideoOnline
-    template_name = 'channels/detail_video.html'
+	model = VideoOnline
+	template_name = 'channels/detail_video.html'
 
 class DeleteVideo(LoginRequiredMixin, generic.DeleteView):
-    model = VideoOnline
-    template_name = 'channels/delete_video.html'
-    # success_url = reverse_lazy('dashboard')
+	model = VideoOnline
+	template_name = 'channels/delete_video.html'
+	# success_url = reverse_lazy('dashboard')
 
-    def get_success_url(self):
-        video = super(DeleteVideo, self).get_object()
-        channelId = video.channel.id
-        return reverse_lazy('detail_channel', args=[channelId])
+	def get_success_url(self):
+		video = super(DeleteVideo, self).get_object()
+		channelId = video.channel.id
+		return reverse_lazy('detail_channel', args=[channelId])
 
-    def get_object(self):
-        video = super(DeleteVideo, self).get_object()
-        if not video.channel.user == self.request.user:
-            raise Http404
-        return video
+	def get_object(self):
+		video = super(DeleteVideo, self).get_object()
+		if not video.channel.user == self.request.user:
+			raise Http404
+		return video
 
 class SignUp(generic.CreateView):
-    form_class = UserCreationForm
-    success_url = reverse_lazy('dashboard')
-    template_name = 'registration/signup.html'
+	form_class = UserCreationForm
+	success_url = reverse_lazy('dashboard')
+	template_name = 'registration/signup.html'
 
-    def form_valid(self, form):
-        view = super(SignUp, self).form_valid(form)
-        # password1 is the password typed in the fields that ask the user to first create a password
-        # password2 is the password that asks the user to confirm password
-        username, password = form.cleaned_data.get('username'), form.cleaned_data.get('password1')
-        user = authenticate(username=username, password=password)
-        login(self.request, user)
-        return view
+	def form_valid(self, form):
+		view = super(SignUp, self).form_valid(form)
+		# password1 is the password typed in the fields that ask the user to first create a password
+		# password2 is the password that asks the user to confirm password
+		username, password = form.cleaned_data.get('username'), form.cleaned_data.get('password1')
+		user = authenticate(username=username, password=password)
+		login(self.request, user)
+		return view
 
 
 class CreateChannel(LoginRequiredMixin, generic.CreateView):
-    model = Channel
-    fields = ['title']
-    template_name = 'channels/create_channel.html'
-    success_url = reverse_lazy('dashboard')
+	model = Channel
+	fields = ['title']
+	template_name = 'channels/create_channel.html'
+	success_url = reverse_lazy('dashboard')
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        super(CreateChannel, self).form_valid(form)
-        return redirect('dashboard')
+	def form_valid(self, form):
+		form.instance.user = self.request.user
+		super(CreateChannel, self).form_valid(form)
+		return redirect('dashboard')
 
 def DetailChannelRender(request, pk):
 	channel = Channel.objects.get(pk=pk)
 	query_result = Result.objects.filter(channel=channel)
 	video_result = {}
+	saved_time = {}
 	for q in query_result:
 		if q.videoonline and q.output :
 			video_result[q.videoonline.youtube_id] = q.videoonline.title
+			saved_time[q.videoonline.youtube_id] = 100 - q.percentage
 	addViewCount(channel, '')
-	return render(request, 'channels/detail_channel.html', {'channel':channel, 'results':video_result})
+	return render(request, 'channels/detail_channel.html', {'channel':channel, 'results':video_result, 'saved_time':saved_time})
 
 def getChannelResult(request):
 	channel = request.POST.get('post_id')
@@ -330,9 +332,9 @@ def getChannelResult(request):
 			video_result[q.videoonline.youtube_id] = q.videoonline.title
 
 	return HttpResponse(
-            json.dumps(video_result),
-            content_type="application/json"
-    )	
+			json.dumps(video_result),
+			content_type="application/json"
+	)	
 
 def getDashboardResult(request):
 	username = request.POST.get('post_id')
@@ -344,36 +346,36 @@ def getDashboardResult(request):
 			video_result[q.videoonline.youtube_id] = q.videoonline.title
 
 	return HttpResponse(
-            json.dumps(video_result),
-            content_type="application/json"
-    )
+			json.dumps(video_result),
+			content_type="application/json"
+	)
 
 class DetailChannel(generic.DetailView):
-    model = Channel
-    template_name = 'channels/detail_channel.html'
+	model = Channel
+	template_name = 'channels/detail_channel.html'
 
 class UpdateChannel(LoginRequiredMixin, generic.UpdateView):
-    model = Channel
-    template_name = 'channels/update_channel.html'
-    fields = ['title']
-    success_url = reverse_lazy('dashboard')
+	model = Channel
+	template_name = 'channels/update_channel.html'
+	fields = ['title']
+	success_url = reverse_lazy('dashboard')
 
-    def get_object(self):
-        channel = super(UpdateChannel, self).get_object()
-        if not channel.user == self.request.user:
-            raise Http404
-        return channel
+	def get_object(self):
+		channel = super(UpdateChannel, self).get_object()
+		if not channel.user == self.request.user:
+			raise Http404
+		return channel
 
 class DeleteChannel(LoginRequiredMixin, generic.DeleteView):
-    model = Channel
-    template_name = 'channels/delete_channel.html'
-    success_url = reverse_lazy('dashboard')
+	model = Channel
+	template_name = 'channels/delete_channel.html'
+	success_url = reverse_lazy('dashboard')
 
-    def get_object(self):
-        channel = super(DeleteChannel, self).get_object()
-        if not channel.user == self.request.user:
-            raise Http404
-        return channel
+	def get_object(self):
+		channel = super(DeleteChannel, self).get_object()
+		if not channel.user == self.request.user:
+			raise Http404
+		return channel
 
 def addViewCount(channel, videoonline) :
 	if channel:
