@@ -96,11 +96,13 @@ def history(request):
 
 def home(request):
     recent_channels = Channel.objects.all().order_by('-id')[:5]
-    # for i in recent_channels:
-    #     print(i.id)
-    # print(recent_channels)
-    # recent_channels = []
-    return render(request, 'channels/home.html', {'recent_channels':recent_channels})
+    query_result = Result.objects.filter(channel__in=recent_channels)
+    video_result = {}
+    for q in query_result:
+        if q.videoonline and q.output:
+            video_result[q.videoonline.youtube_id] = q.videoonline.title
+
+    return render(request, 'channels/home.html', {'recent_channels':recent_channels, 'results':video_result})
 
 @register.filter
 def get_item(dictionary, key):
