@@ -8,6 +8,8 @@
 
 username: admin password:123
 
+Update: the site does not run anymore
+
 ### 1. create a virtualenv with python 3.6 (do not use python 3.7, this will fail the tenserflow install)
 
 `python3 -m venv projvenv`
