@@ -11,7 +11,7 @@ django-widget-tweaks==1.4.5
 facenet==1.0.5
 gunicorn==20.0.0
 h5py==2.10.0
-html5lib==0.9999999
+html5lib==0.999999999
 idna==2.8
 imageio==2.6.1
 imageio-ffmpeg==0.3.0
