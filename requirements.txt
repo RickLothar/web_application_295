@@ -42,7 +42,7 @@ scikit-learn==0.21.3
 scipy==1.2.2
 six==1.13.0
 sqlparse==0.3.0
-tensorflow==2.9.3
+tensorflow==2.11.1
 tqdm==4.38.0
 urllib3==1.26.17
 Werkzeug==2.2.3
